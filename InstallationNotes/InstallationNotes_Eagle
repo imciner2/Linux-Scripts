@@ -1,0 +1,10 @@
+# Install the required libraries for a 32-bit machine
+yum install expat.i686 fontconfig.i686 freetype.i686 glibc.i686 libX11.i686 libXau.i686 libXcursor.i686 libXdmcp.i686 libXext.i686 libXfixes.i686 libXft.i686 libXi.i686 libXrandr.i686 libXrender.i686 libgcc.i686 libpng.i686 libstdc++.i686 libxcb.i686 zlib.i686
+
+yum install openssl-libs.i686
+
+# Symlink the appropriate OpenSSL library files
+ln -s /usr/lib/libssl.so.1.0.1e /usr/lib/libssl.so.1.0.0
+ln -s /usr/lib/libcrypto.so.1.0.1e /usr/lib/libcrypto.so.1.0.0
+
+# Install Eagle

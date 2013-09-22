@@ -1,0 +1,7 @@
+# Remove the splash screen
+# Edit /etc/default/grub and remove "rhgb quiet" from the GRUB_CMDLINE_LINUX line, add "nosplash" to the line
+
+# If the NVIDIA drivers are being used, add "rdblacklist=nouveau" to the GRUB_CMDLINE_LINUX line in /etc/default/grub
+
+# Rebuild the grub config
+grub2-mkconfig -o /boot/grub2/grub.cfg

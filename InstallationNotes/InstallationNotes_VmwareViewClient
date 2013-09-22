@@ -1,0 +1,9 @@
+# The vmware view client package is a 32-bit binary
+
+# Download the package
+wget http://archive.canonical.com/ubuntu/pool/partner/v/vmware-view-client/vmware-view-client_2.1.0.orig.tar.gz
+
+# Install the required packages
+yum install atk.i686 gdk-pixbuf2.i686 gtk2.i686 libxml2.i686 libpng12.i686
+
+# It requires running with the "--desktopSize="1280x800" flag to make it not use the entire screen

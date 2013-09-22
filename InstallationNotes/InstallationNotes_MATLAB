@@ -1,0 +1,16 @@
+#####
+# Make MATLAB actually be able to activate on Fedora
+#####
+
+# Uninstall biosdevname
+yum remove biosdevname
+
+# Add "biosdevname=0" to the /etc/default/grub file under the Linux command line options to disable the biosdevname module on boot
+# Rebuild the Grub splash screen
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# Create the file /etc/udev/rules.d/70-persistent-net.rules with the following information (replace the MAC with the MAC of the computer
+
+# Rule to rename the ethernet device to eth0, required for MATLAB to activate properly
+#SUBSYSTEM=="net", ACTION="add", DRIVERS="?*", ATTR{address}="70:71:BC:AC:27:25", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="eth0"
+
