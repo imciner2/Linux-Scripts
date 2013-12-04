@@ -1,5 +1,7 @@
 ## Snippets of this .bashrc file have been taken from http://tldp.org/LDP/abs/html/sample-bashrc.html
 
+# Add an environment variable to add the GitHub KiCad templates
+export KICAD_PTEMPLATES='~/Documents/Github/KiCad-Libraries/Templates'
 
 #########################################################
 # Color definitions (taken from Color Bash Prompt HowTo).
