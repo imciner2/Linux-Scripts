@@ -1,5 +1,9 @@
 ## Snippets of this .bashrc file have been taken from http://tldp.org/LDP/abs/html/sample-bashrc.html
 
+# Call the global .bashrc file
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
 
 #########################################################
 # Color definitions (taken from Color Bash Prompt HowTo).
