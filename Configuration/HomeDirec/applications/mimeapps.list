@@ -1,0 +1,15 @@
+[Default Applications]
+text/x-tex=texmaker.desktop
+video/mp4=vlc.desktop
+video/quicktime=vlc.desktop
+application/x-cd-image=vlc.desktop
+text/x-chdr=gedit.desktop
+text/x-csrc=gedit.desktop
+
+[Added Associations]
+text/x-tex=texmaker.desktop;
+video/mp4=vlc.desktop;
+video/quicktime=vlc.desktop;
+application/x-cd-image=vlc.desktop;
+text/x-chdr=gedit.desktop;
+text/x-csrc=gedit.desktop;

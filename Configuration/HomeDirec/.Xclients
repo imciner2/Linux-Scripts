@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Start xscreensaver upon initialization of Xserver
+xscreensaver &
+
+# Run the MATE window environment
+exec mate-session

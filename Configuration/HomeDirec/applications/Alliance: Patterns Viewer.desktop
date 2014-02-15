@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=;
+Comment=View the Patterns
+Encoding=UTF-8
+Exec=/usr/lib64/alliance/bin/xpat
+GenericName=xpat
+Hidden=false
+Icon=xpat.png
+Name=Alliance: Patterns Viewer
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

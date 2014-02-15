@@ -1,0 +1,17 @@
+[Desktop Entry]
+Categories=Qt;KDE;Electronics;
+Comment=Integrated development environment for applications based on PIC microcontrollers.
+Comment[fr]=Environnement de développement intégré pour applications à base de microcontrôleurs PIC
+Encoding=UTF-8
+Exec=piklab %u
+GenericName=Integrated Development Environment for PICs
+GenericName[fr]=Environnement de développement intégré
+Hidden=true
+Icon=piklab
+MimeType=application/x-piklab;
+Name=Piklab
+Name[fr]=Piklab
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.21
+X-DocPath=piklab/index.html

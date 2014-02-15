@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=sk2py
+Icon=sk2py
+Categories=Electronics;
+Comment=Migrates Cadence Skill based PCells to Python PyCells.
+Terminal=false
+Name=sk2py
+X-Desktop-File-Install-Version=0.20

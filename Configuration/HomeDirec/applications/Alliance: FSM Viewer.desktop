@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=;
+Comment=View Finite State Machines
+Encoding=UTF-8
+Exec=/usr/lib64/alliance/bin/xfsm
+GenericName=xfsm
+Hidden=true
+Icon=xfsm.png
+Name=Alliance: FSM Viewer
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

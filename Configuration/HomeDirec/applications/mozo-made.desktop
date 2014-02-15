@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=/opt/eagle-6.5.0/bin/eagleicon50.png
+Name[en_US]=Eagle CAD
+Exec=/opt/eagle-6.5.0/bin/eagle
+Comment[en_US]=Eagle Electronics Design Assistant by CADSoft
+Name=Eagle CAD
+Comment=Eagle Electronics Design Assistant by CADSoft
+Icon=/opt/eagle-6.5.0/bin/eagleicon50.png

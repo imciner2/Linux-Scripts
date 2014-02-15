@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=;
+Comment=Verilog code coverage analyzer
+Encoding=UTF-8
+Exec=covered report -view
+GenericName=Covered
+Hidden=false
+Icon=covered
+Name=Coverage Analyzer
+Type=Application
+X-Desktop-File-Install-Version=0.21

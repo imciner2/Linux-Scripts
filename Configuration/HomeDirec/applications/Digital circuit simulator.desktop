@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=;
+Comment=TkGate
+Encoding=UTF-8
+Exec=tkgate
+GenericName=Verilog circuit simulator
+Hidden=false
+Icon=tkgate
+Name=Digital circuit simulator
+Type=Application
+X-Desktop-File-Install-Version=0.20

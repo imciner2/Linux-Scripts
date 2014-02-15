@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Electronics;
+Comment=An 8085 Simulator
+Exec=gsim85
+Hidden=true
+Icon=gsim
+Name=GSim85
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Electronics;Engineering;
+Comment=Resistor color code calculator
+Comment[ro]=Calculator pentru formule electrice
+Encoding=UTF-8
+Exec=gresistor
+Hidden=true
+Icon=gresistor
+MimeType=application/x-glade;
+Name=gResistor
+Name[ro]=gResistor
+Name[ro_RO]=gResistor
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

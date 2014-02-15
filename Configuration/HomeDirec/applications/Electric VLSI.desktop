@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=;
+Comment=MEMs and ASICs CAD System
+Encoding=UTF-8
+Exec=electric
+GenericName=Electric
+Hidden=false
+Icon=electric
+Name=Electric VLSI
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

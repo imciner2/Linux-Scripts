@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Science;Electronics;
+Comment=Compare LVS netlists
+Encoding=UTF-8
+Exec=netgen
+GenericName=netgen
+Hidden=true
+Icon=netgen.png
+Name=LVS netlist comparator
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=Electronics;Engineering;
+Comment=Simulates spice netlists and gEDA schematics
+Encoding=UTF-8
+Exec=gspiceui
+Hidden=true
+Icon=gspiceui
+Name=Spice Simulation Frontend
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

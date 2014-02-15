@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Qt;KDE;Electronics;
+Comment=An IDE for microcontrollers and electronics
+Comment[fr]=Une interface de développement intégrée pour microcontrôleurs et électronique
+DocPath=ktechlab/index.html
+Encoding=UTF-8
+Exec=ktechlab %i %m -caption "%c"
+Hidden=true
+Icon=ktechlab
+MimeType=application/x-ktechlab;application/x-flowcode;application/x-circuit;application/x-microbe;
+Name=KTechlab
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.19

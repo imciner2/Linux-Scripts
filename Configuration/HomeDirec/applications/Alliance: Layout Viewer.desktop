@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=;
+Comment=View the Real layout
+Encoding=UTF-8
+Exec=/usr/lib64/alliance/bin/dreal
+GenericName=dreal
+Hidden=false
+Icon=dreal.png
+Name=Alliance: Layout Viewer
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

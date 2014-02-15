@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Qt;KDE;Electronics;Engineering;Science;
+Comment=Code generator for PIC delays
+Comment[de]=PIC Verzögerungs Berechner
+Comment[es]=Cálculo del retraso del PIC
+Comment[fr]=Générateur de code de temporisations pour les PIC
+Encoding=UTF-8
+Exec=pikloops
+Hidden=true
+Icon=pikloops
+Name=PiKLoops
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

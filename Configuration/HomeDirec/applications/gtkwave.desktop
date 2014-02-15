@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Utility;GTK;Electronics;Engineering;
+Comment=Display simulation results
+Encoding=UTF-8
+Exec=gtkwave
+GenericName=Electronic Waveform Viewer
+Hidden=true
+Icon=gtkwave
+MimeType=application/vnd.gtkwave-ae2;application/vnd.gtkwave-aet;application/vnd.gtkwave-evcd;application/vnd.gtkwave-fst;application/vnd.gtkwave-ghw;application/vnd.gtkwave-gtkw;application/vnd.gtkwave-lx2;application/vnd.gtkwave-lxt2;application/vnd.gtkwave-lxt;application/vnd.gtkwave-vcd;application/vnd.gtkwave-vzt;
+Name=GTKWave
+StartupNotify=true
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20

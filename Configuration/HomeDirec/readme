@@ -1,0 +1,3 @@
+.Xclients is a file located in the home directory which will execute the xscreensaver program, and then launch an instance of MATE. This file requires that the Fedora package xorg-x11-xinit-session package be installed.
+
+The applications directory was taken from ~/.local/share/ and contains desktop icons for the menu bar.

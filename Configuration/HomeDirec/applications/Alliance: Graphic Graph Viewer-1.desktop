@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=;
+Comment=View the graphic graph
+Encoding=UTF-8
+Exec=/usr/lib64/alliance/bin/xgra
+GenericName=xpvn
+Hidden=false
+Icon=xgra.png
+Name=Alliance: Graphic Graph Viewer
+Terminal=false
+Type=Application
+X-Desktop-File-Install-Version=0.20
