@@ -1,0 +1,5 @@
+These kernel flags have been added to the kernel call inside the "GRUB_CMDLINE_LINUX" variable in /etc/default/grub
+
+nosplash		Remove the Fedora splash screen
+rdblacklist=nouveau	Don't start up the Nouveau drivers for Graphics, use NVidia's instead
+biosdevname=0		Don't use the "em0" naming scheme for network adapters, use the "eth0" scheme instead (required for MATLAB to function)

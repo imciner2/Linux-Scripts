@@ -1,0 +1,3 @@
+The file 10-monitor.conf consists of the settings required to create a dual-monitor setup using a Samsung SyncMaster 710N and a Samsung 204B. This file should be placed in /etc/X11/xorg.conf.d/.
+
+The file Xclients has been modified to add MATE sessions to the available options at login. This file should be placed in /etc/X11/xinit/.
