@@ -73,7 +73,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 # Test remote connection type
 if [ -n "${SSH_CONNECTION}" ]; then
     CNX=${BYellow}        # Connected on remote machine, via ssh (good).
-elif [[ "${DISPLAY%%:0*}" != "" ]]; then
+elif [[ "${DISPLAY%%:*}" != "" ]]; then
     CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
 else
     CNX=${BCyan}        # Connected on local machine.
