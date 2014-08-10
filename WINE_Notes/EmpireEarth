@@ -1,0 +1,10 @@
+# In order to make the software work, you need the native DLL from Windows. This will copy the included Windows XP DLL into the System32 directory
+cp Native_WindowsXP/msvcrt.dll ~/.wine/drive_c/windows/system32/
+
+# Also, the software should be told to run on a Windows XP system in the WINE control panel
+
+# The game music should be disabled in the WINE registery by setting the Music Enabled registry key, located in HKEY_CURRENT_USER\Software\SSSI\Empire Earth\ to 0
+
+# It appears that on Fedora 18, the Glamor package provided by Xserver is causing a crash when the menu screen is trying to load
+# Remvoe the package to fix the problem
+yum remove xorg-x11-glamor
