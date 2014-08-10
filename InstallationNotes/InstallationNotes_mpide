@@ -4,21 +4,21 @@
 
 
 # Install the Fedora RXTX package
-yum install rxtx
+# yum install rxtx
 
 #
 # Install mpide into /opt/mpide-0023
 #
 
-# Download mpide
-wget http://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20130715.tgz
-tar -xvf mpide-0023-linux64-20130715.tgz
+# Download mpide if the file doesn't exist
+if [ ![-e mpide-0023-linux64-20140316.tgz] ]
+then
+	wget http://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20140316.tgz
+fi
 
-mv mpide-0023-linux64-20130715/ /opt/
-cd /opt/
-mv mpide-0023-linux64-20130715/ mpide-0023/
+tar -xvf mpide-0023-linux64-20140316.tgz
 
-
+mv mpide-0023-linux64-20140316/* /opt/mpide-0023/
 
 #
 # Change the rxtx libraries the software uses because the version it comes with
