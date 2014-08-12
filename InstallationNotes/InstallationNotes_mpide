@@ -4,14 +4,15 @@
 
 
 # Install the Fedora RXTX package
-# yum install rxtx
+sudo yum install rxtx
 
 #
 # Install mpide into /opt/mpide-0023
 #
 
 # Download mpide if the file doesn't exist
-if [ ![-e mpide-0023-linux64-20140316.tgz] ]
+cd ~/Downloads/
+if [ ! -f mpide-0023-linux64-20140316.tgz ]
 then
 	wget http://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20140316.tgz
 fi
