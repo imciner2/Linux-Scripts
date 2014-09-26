@@ -1,8 +1,13 @@
 ## Snippets of this .bashrc file have been taken from http://tldp.org/LDP/abs/html/sample-bashrc.html
 
-# Call the global .bashrc file
+# Read in the machine's master .bashrc file
 if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+    . /etc/bashrc
+fi
+
+# Read in the machine specific .bashrc information if it exists
+if [ -e ~/.bashrc_custom ]; then
+    . ~/.bashrc_custom
 fi
 
 # Add an environment variable to add the GitHub KiCad templates
@@ -73,7 +78,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 # Test remote connection type
 if [ -n "${SSH_CONNECTION}" ]; then
     CNX=${BYellow}        # Connected on remote machine, via ssh (good).
-elif [[ "${DISPLAY%%:0*}" != "" ]]; then
+elif [[ "${DISPLAY%%:*}" != "" ]]; then
     CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
 else
     CNX=${BCyan}        # Connected on local machine.

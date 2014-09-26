@@ -4,33 +4,38 @@
 
 
 # Install the Fedora RXTX package
-yum install rxtx
+sudo yum install rxtx
 
 #
 # Install mpide into /opt/mpide-0023
 #
 
-# Download mpide
-wget http://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20130715.tgz
-tar -xvf mpide-0023-linux64-20130715.tgz
+# Download mpide if the file doesn't exist
+cd ~/Downloads/
+if [ ! -f mpide-0023-linux64-20140316.tgz ]
+then
+	wget http://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20140316.tgz
+fi
 
-mv mpide-0023-linux64-20130715/ /opt/
-mv mpide-0023-linux64-20130715/ mpide-0023/
+tar -xvf mpide-0023-linux64-20140316.tgz
 
-
+mv mpide-0023-linux64-20140316/* /opt/mpide-0023/
 
 #
-# Change the rxtx libraries the software uses
+# Change the rxtx libraries the software uses because the version it comes with
+# is incompatible with Fedora 18 due to changes in the directory permissions.
+# The fix for this is to link in the system-wide rxtx libraries for use instead
+# of the libraries it came with.
 #
 cd /opt/mpide-0023/lib/
 
 # Get rid of the rxtx libraries which is came with
 mkdir OldLibraries
-mv RXTXComm.jar OldLibraries/
+mv RXTXcomm.jar OldLibraries/
 mv librxtxSerial64.so OldLibraries/
 mv librxtxSerial.so OldLibraries/
 
 # Link in the system-wide rxtx libraries
 ln -s /lib64/rxtx/librxtxSerial.so librxtxSerial64.so
-ln -s /usr/share/java/RXTXcomm.jar RXTXComm.jar
+ln -s /usr/share/java/RXTXcomm.jar RXTXcomm.jar
 
