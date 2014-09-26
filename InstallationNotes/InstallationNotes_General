@@ -3,5 +3,9 @@
 
 # If the NVIDIA drivers are being used, add "rdblacklist=nouveau" to the GRUB_CMDLINE_LINUX line in /etc/default/grub
 
+# Install nvidia drivers so they rebuild on kernel updates
+# This is for a Nvidia GT430, full supported list here: ftp://download.nvidia.com/XFree86/Linux-x86_64/310.32/README/supportedchips.html
+yum install akmod-nvidia
+
 # Rebuild the grub config
 grub2-mkconfig -o /boot/grub2/grub.cfg
