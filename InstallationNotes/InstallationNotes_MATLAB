@@ -5,7 +5,7 @@
 # Uninstall biosdevname
 yum remove biosdevname
 
-# Add "biosdevname=0" to the /etc/default/grub file under the Linux command line options to disable the biosdevname module on boot
+# Add "biosdevname=0 net.ifnames=0" to the /etc/default/grub file under the Linux command line options to disable the biosdevname module on boot
 # Rebuild the Grub splash screen
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
