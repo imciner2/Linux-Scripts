@@ -1,0 +1,14 @@
+# In order for Modelsim to work on Fedora, the freetype library used must be version 2.4.7
+cd ~/Downloads
+wget http://download.savannah.gnu.org/releases/freetype/freetype-2.4.7.tar.gz
+tar -xvf freetype-2.4.7.tar.gz
+
+# Build the library
+cd freetype-2.4.7
+./configure
+make
+
+# Install the library into the /usr/local directory
+sudo cp ~/Downloads/freetype-2.4.7/objs/.libs/libfreetype.s0.6.7.2 /usr/local/lib64 
+ln -s libfreetype.so.6.7.2 libfreetype.so.6
+ln -s libfreetype.so.6 libfreetype.so
