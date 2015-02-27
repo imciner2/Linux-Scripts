@@ -11,7 +11,7 @@ if [ -e ~/.bashrc_custom ]; then
 fi
 
 # Add an environment variable to add the GitHub KiCad templates
-export KICAD_PTEMPLATES='~/Documents/Github/KiCad-Libraries/Templates'
+export KICAD_PTEMPLATES='$HOME/Documents/Github/KiCad-Libraries/Templates'
 
 #########################################################
 # Color definitions (taken from Color Bash Prompt HowTo).
