@@ -14,3 +14,5 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 # Rule to rename the ethernet device to eth0, required for MATLAB to activate properly
 #SUBSYSTEM=="net", ACTION="add", DRIVERS="?*", ATTR{address}="70:71:BC:AC:27:25", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="eth0"
 
+# Rename the file "ifcfg-*" inside /etc/sysconfig/network-scripts to be "ifcfg-eth0"
+# Change the field for "name" in that file to contain "eth0" instead of the default name
