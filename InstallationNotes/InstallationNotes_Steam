@@ -1,0 +1,15 @@
+# Steam is a 32-bit application, so all libraries it needs are 32-bit
+
+# To fix the the GL rendering issue described here: https://support.steampowered.com/kb_article.php?ref=9938-EYZB-7457
+
+# Install the appropriate packages for the driver:
+# yum install xorg-x11-drv-MANU-libs.i686, where MANU is the manufacturer for the graphics card
+yum install xorg-x11-drv-nvidia-libs.i686 	# For the NVIDIA drivers
+
+# Install the remaining mesa GL libraries
+yum install mesa-dri-filesystem.i686 mesa-dri-drivers.i686 mesa-libGLU-devel.i686 mesa-libgbm.i686 mesa-libglapi.i686 mesa-libGL.i686 mesa-libGLU.i686 mesa-libEGL.i686
+
+# Instasll the 32-bit glxinfo32 package to check direct rendering support
+# It is not provided in the repository, so you have to download it directly
+# Find the package here: http://www.rpmfind.net/linux/rpm2html/search.php?query=glx-utils
+# Then install it
