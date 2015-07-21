@@ -1,7 +1,7 @@
 #
 # Add the user to the lock and the uucp groups
 #
-
+USER=$(whoami)
 
 # Install the Fedora RXTX package
 sudo yum install rxtx
@@ -12,14 +12,25 @@ sudo yum install rxtx
 
 # Download mpide if the file doesn't exist
 cd ~/Downloads/
-if [ ! -f mpide-0023-linux64-20140316.tgz ]
+if [ ! -f mpide-0023-linux64-20140821.tgz ]
 then
-	wget http://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20140316.tgz
+	wget https://chipkit.s3.amazonaws.com/builds/mpide-0023-linux64-20140821.tgz
 fi
 
-tar -xvf mpide-0023-linux64-20140316.tgz
+# Delete the previous extraction
+rm -rf mpide-0023-linux64-20140821/*
 
-mv mpide-0023-linux64-20140316/* /opt/mpide-0023/
+tar -xf mpide-0023-linux64-20140821.tgz
+
+# Make the directory in /opt, don't fail if it already exists
+sudo mkdir -p /opt/mpide-0023
+sudo chown $USER:$USER /opt/mpide-0023
+
+# Remove anything already in the /opt/mpide-0023 directory
+rm -rf /opt/mpide-0023/*
+
+# Move the new files into the directory
+mv mpide-0023-linux64-20140821/* /opt/mpide-0023/
 
 #
 # Change the rxtx libraries the software uses because the version it comes with
