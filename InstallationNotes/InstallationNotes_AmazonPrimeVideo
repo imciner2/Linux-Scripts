@@ -1,0 +1,10 @@
+# To get Amazon Prime Instant Video to work on Fedora, you must do the following:
+# This is based off of: http://infotech-galo.blogspot.com/2014/05/playing-amazon-prime-instant-video-on.html
+# 1) Install Flash player and verify it works in Firefox
+
+# 2) Install a wrapper for the HAL system. This is required to get the DRM system to work. To do that, use a command similat to this:
+yum install http://sourceforge.net/projects/postinstaller/files/fedora/releases/20/x86_64/updates/hal-flash-0.2.0rc1-1.fc20.x86_64.rpm  
+# The release number and architecture may need to be changed, just browse the files here to find the right link to the hal-flash package
+# http://sourceforge.net/projects/postinstaller/files/fedora/releases/
+
+# 3) Use Firefox to play the videos
