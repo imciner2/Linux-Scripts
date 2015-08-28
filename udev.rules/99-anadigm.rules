@@ -1,0 +1,3 @@
+# This creates a udev rule for the Anadigm Systems Quad Apex development board
+# It will create a symlink to the serial port in a file called /dev/anadigm
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="000a", ATTRS{product}=="CDC RS-232 Emulation Demo", SYMLINK+="anadigm"
