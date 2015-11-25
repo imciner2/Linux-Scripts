@@ -1,0 +1,5 @@
+# To find device info, simply use the following command style:
+# udevadm info -a -p $(udevadm info -q path -n /dev/path)
+# Where the /dev/path is the path to the enumerated device
+# This command output will then give the information needed
+# to create the device filters
