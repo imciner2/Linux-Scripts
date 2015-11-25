@@ -9,6 +9,7 @@ cd freetype-2.4.7
 make
 
 # Install the library into the /usr/local directory
-sudo cp ~/Downloads/freetype-2.4.7/objs/.libs/libfreetype.s0.6.7.2 /usr/local/lib64 
-ln -s libfreetype.so.6.7.2 libfreetype.so.6
-ln -s libfreetype.so.6 libfreetype.so
+sudo cp ~/Downloads/freetype-2.4.7/objs/.libs/libfreetype.so.6.7.2 /usr/local/lib64 
+cd /usr/local/lib64
+sudo ln -s libfreetype.so.6.7.2 libfreetype.so.6
+sudo ln -s libfreetype.so.6 libfreetype.so

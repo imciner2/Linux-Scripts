@@ -1,0 +1,18 @@
+# The following provides a method to install the Mendeley desktop program into a usable place on a Linux system
+
+# First, download mendeley
+
+# Create a directory inside /opt to contain mendeley
+sudo mkdir /opt/mendeley
+
+# Copy the files for mendeley into the directory (note, the downloads path may change)
+cp -r ~/Downloads/mendeleydesktop-1.13.5-linux-x86_64/* mendeley/
+
+# Add the following lines to the .bashrc file to make mendeley easier to use
+
+#	# Add Mendeley to the path
+#	PATH=$PATH:/opt/mendeley/bin
+#  
+#	# Alias mendeley 
+#	alias mendeley="mendeleydesktop"
+	   
