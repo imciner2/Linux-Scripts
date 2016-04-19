@@ -1,0 +1,11 @@
+30a
+else
+    LOCAL="Tarball build"
+    REV=" Build from GIT tree for accurate versioning"
+    TAG=`pwd | grep -o "20[0-9][0-9]\\.[0-9][0-9]\?\(\\.[0-9][0-9]\?\)\?$"`
+    MODIFIED=1
+.
+17c
+elif test -d .hg ; then
+.
+w

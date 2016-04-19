@@ -1,0 +1,11 @@
+# Install the arm build software
+# Note the arm-none-eabi-gdb-devel library conflicts with the normal gdb library
+dnf install arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs arm-none-eabi-gcc-cs-c++ arm-none-eabi-gdb arm-none-eabi-newlib
+
+# When building the firmware you need to fix an issue where it does not like to build outside of a repository, follow the steps here:
+#https://github.com/bitcraze/crazyflie-firmware/commit/74ea79ff35c399e811caf11505c3f8cd8e18958c?diff=unified
+# Alternately run the following commands
+# ed - print_revision.sh < print_revision.ed
+# ed - versionTemplate.py < versionTemplate.ed
+
+# If print_revision.sh errors out when building, run chmod +x print_revision.sh

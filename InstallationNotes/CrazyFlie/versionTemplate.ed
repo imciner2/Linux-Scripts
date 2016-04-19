@@ -1,0 +1,26 @@
+71a
+else:
+    sourcefolder = path.basename(path.abspath(path.dirname(__file__) + '/..'))
+    match = re.match(".*(20[0-9][0-9]\\.[0-9][0-9]?(\\.[0-9][0-9]?)?)$", sourcefolder)
+
+    version['revision'] = 'NA'
+    version['irevision0'] = "0x" + '0'
+    version['irevision1'] = "0x" + '0'
+    version['local_revision'] = 'NA'
+    version['branch'] = 'NA'
+    version['modified'] = 'true'
+
+    if match is not None:
+        version['tag'] = match.group(1)
+    else:
+        version['tag'] = 'NA'
+.
+53,54c
+elif os.path.isdir(".hg"):
+    # Mercurial
+.
+5a
+from os import path
+import re
+.
+w
