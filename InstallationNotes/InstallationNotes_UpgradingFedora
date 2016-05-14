@@ -1,0 +1,10 @@
+# From this site: https://fedoraproject.org/wiki/Upgrading_Fedora_using_package_manager
+# Install some useful utilities
+yum install rpmconf yum-utils
+
+# Search through the current RPM downloads and resolve differences
+rpmconf -a
+
+# Search for orphaned packages
+package-cleanup --orphans
+
