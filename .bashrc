@@ -5,6 +5,9 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# Create an alias for valgrind with some options
+alias val='valgrind --track-origins=yes'
+
 # Read in the machine specific .bashrc information if it exists
 if [ -e ~/.bashrc_custom ]; then
     . ~/.bashrc_custom
