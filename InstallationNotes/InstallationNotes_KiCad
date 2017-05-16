@@ -5,23 +5,40 @@
 # and KiCad question (272554, https://answers.launchpad.net/kicad/+question/272554)
 
 # First remove any currently installed KiCad versions (This should be able to be skipped if needed)
-dnf remove kicad
+sudo dnf remove kicad
 
 # Then install the compatibility libraries provided in the repositories
 # These libraries present a wxWidgets library that is still compiled using GTK2, and are therefore don't have this bug
-dnf install compat-wxGTK3-gtk2 compat-wxBase3-gtk2 compat-wxGTK3-gtk2-gl compat-wxGTK3-gtk2-devel compat-wxGTK3-gtk2-media
+sudo dnf install compat-wxGTK3-gtk2 compat-wxBase3-gtk2 compat-wxGTK3-gtk2-gl compat-wxGTK3-gtk2-devel compat-wxGTK3-gtk2-media
+
+# Install some miscellaneous libraries required for KiCad
+sudo dnf install glm-devel libcurl libcurl-devel
 
 # Since it is not compiling Boost, make sure that the proper packages are installed (see below for reason)
 # (Boost package list from here: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=798966)
-dnf install boost boost-devel boost-thread boost-context boost-date-time boost-filesystem boost-iostreams boost-locale boost-program-options boost-regex boost-system boost-thread
+sudo dnf install boost boost-devel boost-thread boost-context boost-date-time boost-filesystem boost-iostreams boost-locale boost-program-options boost-regex boost-system boost-thread
 
 # Add the location for the new compatibility library to the path
 export PATH=/usr/libexec/compat-wxGTK3-gtk2:$PATH
 
-# Disable the building of the Boost library (it has an incompatibility with recent gcc) and Fedora 23 ships with Boost 1.58 currently
-# (See KiCad bug 1500511, https://bugs.launchpad.net/kicad/+bug/1500511)
-export OPTS="$OPTS -DKICAD_SKIP_BOOST=ON"
+# This assumes that the sources are already cloned from the repository located here:
+# git clone -b master https://git.launchpad.net/kicad
 
-# Now you can run the ./kicad_install.sh script to install KiCad, and it will use the compatibility library and not compile Boost
-wget http://bazaar.launchpad.net/~kicad-product-committers/kicad/product/view/head:/scripts/kicad-install.sh
-./kicad-install.sh --install-or-update
+# Navigate to the directory for the sources and pull them
+cd ~/Documents/KiCad/kicad
+git pull
+mkdir -p build/release
+mkdir build/debug
+cd build/debug
+
+# Build and install KiCad
+cmake -DKICAD_SKIP_BOOST=ON -DKICAD_SCRIPTING=ON -DCMAKE_BUILD_TYPE=Debug ../../
+make
+sudo make install
+
+# Update shared library listing if it doesn't exist (programs crash if this isn't done)
+if ! [ -e /etc/ld.so.conf.d/kicad.conf ]; then
+	echo "Creating LDCONFIG library file"
+	sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/kicad.conf'
+	sudo ldconfig
+fi
