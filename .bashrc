@@ -8,6 +8,8 @@ fi
 # Create an alias for valgrind with some options
 alias val='valgrind --track-origins=yes'
 
+alias ll="pwd; ls -lah"
+
 # Read in the machine specific .bashrc information if it exists
 if [ -e ~/.bashrc_custom ]; then
     . ~/.bashrc_custom
