@@ -9,6 +9,7 @@ fi
 alias val='valgrind --track-origins=yes'
 
 alias ll="pwd; ls -lah"
+alias vr="vi -R"
 
 # Read in the machine specific .bashrc information if it exists
 if [ -e ~/.bashrc_custom ]; then
