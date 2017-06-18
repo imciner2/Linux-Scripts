@@ -1,0 +1,34 @@
+#!/bin/bash
+# This script is designed to be a Caja script
+# Use gs to compress PDF files
+
+# Determine if gs is installed
+GS=$(which gs)
+
+if [ -z $GS ];
+then
+  zenity --error --title="Error" --text="Unable to find the GhostScript executable. Make sure it is installed"
+  exit
+fi
+
+# Select the compression level
+LEVEL=$(zenity --list --radiolist --width=575 --height=250 \
+--title="Select Compression Level" --text="Select the compression level for the PDF files" \
+--column="Select" --column="Command" --column="Level" --column="Description" --hide-column=2 \
+TRUE screen Screen "Low Quality, small size" \
+FALSE ebook EBook "Better Quality, smal size" \
+FALSE prepress Prepress "Similar to Acrobat Distiller Prepress Optimized setting" \
+FALSE printer Printer "Similar to Acrobat Distiller Print Optimized setting" \
+FALSE default Default "Default output, for wide variety of uses")
+
+
+# Iterate over each file selected
+FILES=$CAJA_SCRIPT_SELECTED_FILE_PATHS
+for file in $FILES
+do
+  NAME=${file%".pdf"}
+  INPUTFILE="$file"
+  OUTPUTFILE="$NAME-$LEVEL.pdf"
+
+  gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/$LEVEL" -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OUTPUTFILE $INPUTFILE
+done
