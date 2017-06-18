@@ -22,13 +22,36 @@ FALSE printer Printer "Similar to Acrobat Distiller Print Optimized setting" \
 FALSE default Default "Default output, for wide variety of uses")
 
 
-# Iterate over each file selected
+# Figure out the files and how many there are
 FILES=$CAJA_SCRIPT_SELECTED_FILE_PATHS
-for file in $FILES
-do
-  NAME=${file%".pdf"}
-  INPUTFILE="$file"
-  OUTPUTFILE="$NAME-$LEVEL.pdf"
+NUMFILES=$(echo "$FILES" | wc -l)
+let NUMFILES--
+NUMFILE=1
 
-  gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/$LEVEL" -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OUTPUTFILE $INPUTFILE
-done
+# Iterate over each file
+(for f in $FILES
+do
+  # Determine its file type
+  TYPE=$(file -b --mime-type $f)
+  
+  if [ $TYPE != "application/pdf" ];
+  then
+    # This only works on PDF files, throw an error if it is not a PDF
+    zenity --error --title="Not a PDF" --text="$f is not a PDF file. This script only works on PDF files."
+  else
+    # Create the file names and do the conversion
+    NAME=${f%".pdf"}
+    INPUTFILE="$f"
+    OUTPUTFILE="$NAME-$LEVEL.pdf"
+
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/$LEVEL" -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OUTPUTFILE $INPUTFILE
+  fi
+
+  # Compute the progress bar percentage and update the bar
+  PERCENTAGE=$(( (NUMFILE * 100) / NUMFILES))
+  echo "$PERCENTAGE"
+  echo "#$NUMFILE out of $NUMFILES"
+  let NUMFILE++
+done ) | zenity --progress --title="Converting Files..." --percentage=0 --auto-close --no-cancel
+
+zenity --info --title="Complete" --text="Conversion completed"
