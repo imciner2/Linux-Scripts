@@ -1,6 +1,6 @@
-#####
-# Make MATLAB actually be able to activate on Fedora
-#####
+######################################################
+# Make MATLAB actually be able to activate on Fedora #
+######################################################
 
 # Uninstall biosdevname
 yum remove biosdevname
@@ -16,3 +16,27 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Rename the file "ifcfg-*" inside /etc/sysconfig/network-scripts to be "ifcfg-eth0"
 # Change the field for "name" in that file to contain "eth0" instead of the default name
+
+######################################################
+# Make the serial port work on Fedora/Redhat systems #
+######################################################
+
+# Change the rxtx libraries the software uses because the version it comes with
+# is incompatible with Fedora 18 due to changes in the directory permissions.
+# The fix for this is to link in the system-wide rxtx libraries for use instead
+# of the libraries it came with.
+
+# cd /opt/matlab/version
+
+# Install the uucp package and add the user to the lock groups
+dnf install uucp
+usermod -aG uucp $(whoami)
+usermod -aG lock $(whoami)
+
+# Get rid of the rxtx libraries which ship with MATLAB
+mv java/jarext/RXTXcomm.jar java/jarext/RXTXcomm.jar.original
+mv bin/glnxa64/librxtxSerial.so bin/glnxa64/librxtxSerial.so
+
+# Link in the system-wide rxtx libraries
+ln -s /lib64/rxtx/librxtxSerial.so bin/glnxa64/librxtxSerial.so
+ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
