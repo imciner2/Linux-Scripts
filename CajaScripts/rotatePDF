@@ -1,0 +1,43 @@
+#!/bin/bash
+# This script is designed to be a Caja script
+# Roate PDF files
+
+# Select the rotation angle
+ROT=$(zenity --list --radiolist --width=575 --height=250 \
+--title="Select Rotation Angle" --text="Select the rotation angle for the PDF files" \
+--column="Select" --column="Command" --column="Description" --hide-column=2 \
+TRUE pdf90 "90 Degrees Counter-Clockwise" \
+FALSE pdf180 "180 Degrees Counter-Clockwise" \
+FALSE pdf270 "270 Degrees Counter-Clockwise")
+
+
+# Figure out the files and how many there are
+FILES=$CAJA_SCRIPT_SELECTED_FILE_PATHS
+NUMFILES=$(echo "$FILES" | wc -l)
+let NUMFILES--
+NUMFILE=1
+
+# Iterate over each file
+(for f in $FILES
+do
+  # Determine its file type
+  TYPE=$(file -b --mime-type $f)
+  
+  if [ $TYPE != "application/pdf" ];
+  then
+    # This only works on PDF files, throw an error if it is not a PDF
+    zenity --error --title="Not a PDF" --text="$f is not a PDF file. This script only works on PDF files."
+  else
+    # Create the file names and do the rotation
+    INPUTFILE="$f"
+    $ROT $INPUTFILE
+  fi
+
+  # Compute the progress bar percentage and update the bar
+  PERCENTAGE=$(( (NUMFILE * 100) / NUMFILES))
+  echo "$PERCENTAGE"
+  echo "#$NUMFILE out of $NUMFILES"
+  let NUMFILE++
+done ) | zenity --progress --title="Rotating Files..." --percentage=0 --auto-close --no-cancel
+
+zenity --info --title="Complete" --text="Rotation completed"
