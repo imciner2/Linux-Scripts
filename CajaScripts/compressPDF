@@ -16,7 +16,7 @@ LEVEL=$(zenity --list --radiolist --width=575 --height=250 \
 --title="Select Compression Level" --text="Select the compression level for the PDF files" \
 --column="Select" --column="Command" --column="Level" --column="Description" --hide-column=2 \
 TRUE screen Screen "Low Quality, small size" \
-FALSE ebook EBook "Better Quality, smal size" \
+FALSE ebook EBook "Better Quality, small size" \
 FALSE prepress Prepress "Similar to Acrobat Distiller Prepress Optimized setting" \
 FALSE printer Printer "Similar to Acrobat Distiller Print Optimized setting" \
 FALSE default Default "Default output, for wide variety of uses")

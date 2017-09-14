@@ -1,0 +1,12 @@
+#!/bin/bash
+# This script is designed to be a Caja script
+# Join together the selected files in sorted order
+
+FILES=$CAJA_SCRIPT_SELECTED_FILE_PATHS
+
+IFS=$'\n' sorted=($(sort <<<"${FILES[*]}"))
+unset IFS
+
+OUTPUT=$(zenity --entry --title="Output File Name" --entry-text="output.pdf")
+
+pdfjoin $FILES --outfile $OUTPUT
