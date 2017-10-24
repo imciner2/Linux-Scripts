@@ -8,7 +8,8 @@ fi
 # Create an alias for valgrind with some options
 alias val='valgrind --track-origins=yes'
 
-alias ll="pwd; ls -lah"
+alias grep="/bin/grep --color=always"
+alias ll="pwd; ls -lah --color=always"
 alias vr="vi -R"
 
 # Read in the machine specific .bashrc information if it exists
@@ -90,10 +91,13 @@ else
     CNX=${BCyan}        # Connected on local machine.
 fi
 
+# Read the login user, Needed to hack around a stupid Ubuntu bug
+LOGIN_USR=${SUDO_USER:-${USER}}
+
 # Test user type
 if [[ ${USER} == "root" ]]; then
     SU=${Red}           # User is root.
-elif [[ ${USER} != $(logname) ]]; then
+elif [[ ${USER} != ${LOGIN_USR} ]]; then
     SU=${BRed}          # User is not login user.
 else
     SU=${BCyan}         # User is normal (well ... most of us are).
