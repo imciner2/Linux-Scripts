@@ -5,17 +5,27 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-# Create an alias for valgrind with some options
-alias val='valgrind --track-origins=yes'
-
-alias grep="/bin/grep --color=always"
-alias ll="pwd; ls -lah --color=always"
-alias vr="vi -R"
-
 # Read in the machine specific .bashrc information if it exists
 if [ -e ~/.bashrc_custom ]; then
     . ~/.bashrc_custom
 fi
+
+# Create an alias for valgrind with some options
+alias val='valgrind --track-origins=yes'
+
+# Create an alias for either ls or exa
+# Exa is a replacement for ls with git status integration
+# https://the.exa.website/
+if [ -x "$(command -v exa)" ];
+then
+	alias ll="pwd; exa -lah --git --color=always"
+else
+	alias ll="pwd; ls -lah --color=always"
+fi
+
+alias grep="/bin/grep --color=always"
+alias vr="vi -R"
+
 
 #########################################################
 # Color definitions (taken from Color Bash Prompt HowTo).
