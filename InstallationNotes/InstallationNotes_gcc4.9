@@ -1,0 +1,29 @@
+#/bin/bash
+
+# gcc 4.9 is provided by a COPR repo for fedora
+sudo dnf copr enable davidva/gcc49
+sudo dnf install gcc49
+
+cd /opt/gcc-4.9.*
+
+
+GCC49=$(pwd)
+
+sudo mkdir lnbin
+cd lnbin
+
+sudo ln -s $GCC49/bin/c++ c++-4.9
+sudo ln -s $GCC49/bin/cpp cpp-4.9
+sudo ln -s $GCC49/bin/g++ g++-4.9
+sudo ln -s $GCC49/bin/gcc gcc-4.9
+sudo ln -s $GCC49/bin/gcc-ar gcc-ar-4.9
+sudo ln -s $GCC49/bin/gccgo gccgo-4.9
+sudo ln -s $GCC49/bin/gcc-nm gcc-nm-4.9
+sudo ln -s $GCC49/bin/gcc-ranlib gcc-ranlib-4.9
+sudo ln -s $GCC49/bin/gcov gcov-4.9
+sudo ln -s $GCC49/bin/gfortran gfortran-4.9
+
+# Note: libgcc_s.a is not included, so it may need to be symlinked in manually
+# Simply symlink it to the libgcc.a file in the same directory
+
+
