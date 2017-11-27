@@ -9,4 +9,4 @@ unset IFS
 
 OUTPUT=$(zenity --entry --title="Output File Name" --entry-text="output.pdf")
 
-pdfjoin $FILES --outfile $OUTPUT
+pdfjoin $FILES --outfile $OUTPUT --rotateoversize false
