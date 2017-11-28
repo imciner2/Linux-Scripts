@@ -33,3 +33,9 @@ echo $MYMATLAB
 # Run the installer
 cd cutest
 $ARCHDEFS/install_optsuite
+
+# There is a change in the way the ar program works, currently a lot of distros
+# will use deterministic mode in ar, which generates warnings everytime the program
+# is used
+# To fix this, modify the make file (located in the makefiles directory) to have
+# ARREPFLAGS = -rcU instead of -rcu
