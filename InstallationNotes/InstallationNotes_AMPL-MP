@@ -1,0 +1,28 @@
+#!/bin/bash
+# This will install the C++ interface to the AMPL solver library.
+# The final result is a library directory located at /opt/mp
+
+mkdir -p $HOME/Documents/code
+AMPL_CODE="$HOME/Documents/code/mp"
+AMPL_INSTALL="/opt/mp"
+
+# Pull or update the AMPL library code
+if [ -e $AMPL_CODE ]; then
+	cd $AMPL_CODE
+	git pull
+else
+	git clone https://github.com/ampl/mp
+	cd $AMPL_CODE
+	git submodule init
+	git submodule update
+fi
+
+# Build the code and install it into /opt/mp
+mkdir -p build
+cd build
+cmake -DBUILD=asl -DCMAKE_INSTALL_PREFIX:PATH=$AMPL_INSTALL ../
+make
+sudo make install
+
+printf "\nSet the following environment variable to locate the AMPL/MP installation directory:\n"
+printf "AMPL_DIR=%s\n" $AMPL_INSTALL
