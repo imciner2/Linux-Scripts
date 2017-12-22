@@ -1,6 +1,8 @@
 {
-	// Place this file in the folder
-	// ~/.config/sublime-text-3/Packages/User
+	"added_words":
+	[
+		"quadcopter"
+	],
 	"bold_folder_labels": true,
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
