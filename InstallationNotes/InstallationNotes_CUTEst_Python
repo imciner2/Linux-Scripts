@@ -1,0 +1,72 @@
+#!/bin/bash
+# This script will install all the required dependencies for the CUTEST
+# Python 2.7 interface.
+
+# Install dependencies for the interface
+if [ -x "$(command -v dnf)" ];
+then
+	sudo dnf install python2-pip redhat-rpm-config python2-devel
+elif [ -x "$(command -v apt-get)" ];
+then
+	sudo apt-get install pip python-dev
+fi
+
+# pip install some needed packages
+sudo pip install numpy
+sudo pip install configparser
+sudo pip install cython
+sudo pip install scipy
+
+# Pull the required Python packages from GitHub
+SRC_DIR="$HOME/Documents/Python"
+mkdir -p $SRC_DIR
+cd $SRC_DIR
+
+if [ -e $SRC_DIR/pykrylov ]; then
+	cd $SRC_DIR/pykrylov
+	git pull
+else
+	git clone https://github.com/PythonOptimizers/pykrylov.git
+fi
+
+if [ -e $SRC_DIR/cysparse ]; then
+	cd $SRC_DIR/cysparse
+	git pull
+else
+	git clone https://github.com/PythonOptimizers/cysparse.git
+fi
+
+if [ -e $SRC_DIR/NLP.py ]; then
+	cd $SRC_DIR/NLP.py
+	git pull
+else
+	git clone https://github.com/PythonOptimizers/NLP.py.git
+fi
+
+if [ -e $SRC_DIR/CUTEST.py ]; then
+	cd $SRC_DIR/CUTEST.py
+	git pull
+else
+	git clone https://github.com/kenjydem/CUTEST.py.git
+fi
+
+# Go into each directory and build/install the module
+cd $SRC_DIR/pykrylov
+python setup.py build
+sudo python setup.py install
+
+cd $SRC_DIR/cysparse
+python setup.py build
+sudo python setup.py install
+
+cd $SRC_DIR/NLP.py
+printf "[ASL]\nasl_dir = %s\n" $AMPL_DIR > site.cfg
+python setup.py build
+sudo python setup.py install
+
+cd $SRC_DIR/CUTEST.py
+printf "[DEFAULT]\n" > cutest/tools/site.cfg
+printf "library_dirs = /usr/lib:/usr/local/lib\n" >> cutest/tools/site.cfg
+printf "include_dirs = /usr/include:/usr/local/include\n" >> cutest/tools/site.cfg
+python setup.py build
+sudo python setup.py install
