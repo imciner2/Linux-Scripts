@@ -66,7 +66,7 @@ for d in $EXIST_INSTALL; do
 	path_remove "$XILBASE/SDK/$d/bin"
 done
 
-printf "\n"
+disp "\n"
 
 # Make sure that the Xilinx version is installed
 if [ $MATCH == 0 ];
