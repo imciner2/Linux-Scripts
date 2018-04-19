@@ -7,6 +7,10 @@
 # e.g. /usr/local/MATLAB or /opt/MATLAB
 
 
+###############################################################
+# Some helper functions
+###############################################################
+
 # A path removal function from: https://unix.stackexchange.com/questions/108873/removing-a-directory-from-path
 function path_remove {
   # Delete path by parts so we can never accidentally remove sub paths
@@ -22,6 +26,12 @@ function disp {
 		printf "$1"
 	fi
 }
+
+
+
+###############################################################
+# Parse the arguments
+###############################################################
 
 # Check to see if printing is desired
 if [ -z $2 ];
@@ -48,6 +58,12 @@ then
 	return 1 2> /dev/null || exit 1
 fi
 
+
+
+###################################################################
+# Clean the path
+###################################################################
+
 # Get all existing MATLAB installations to remove them from the path
 EXIST_INSTALL=$(dir $MATBASE)
 disp "Detected MATLAB versions:"
@@ -56,24 +72,34 @@ MATCH=0
 for d in $EXIST_INSTALL; do
 	disp " $d"
 	
+  # See if the desired version is installed
   if [ "$d" == $MATVER ];
   then
     MATCH=1
   fi
 
+  # Actually remove the path variables
   path_remove "$MATBASE/$d/bin"
 done
 
 disp "\n"
 
-# Make sure that the MATLAB version is installed
+
+
+############################################################
+# Make sure that the version is installed
+############################################################
 if [ $MATCH == 0 ];
 then
   disp "Error: The requested version $MATVER is not installed.\n"
   return 1 2> /dev/null || exit 1
 fi
 
+
+
+############################################################
 # Do the configuration
+############################################################
 disp "\tConfiguring for MATLAB $MATVER\n"
 
 # Configure the path

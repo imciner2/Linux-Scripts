@@ -6,6 +6,11 @@
 # This script requires the environment variable XILBASE be set to the path that contains the base path
 # e.g. /opt/Xilinx
 
+
+###############################################################
+# Some helper functions
+###############################################################
+
 # A path removal function from: https://unix.stackexchange.com/questions/108873/removing-a-directory-from-path
 function path_remove {
   # Delete path by parts so we can never accidentally remove sub paths
@@ -22,6 +27,11 @@ function disp {
   fi
 }
 
+
+
+###############################################################
+# Parse the arguments
+###############################################################
 
 # Check to see if printing is desired
 if [ -z $2 ];
@@ -41,14 +51,20 @@ else
   XILVER=$1
 fi
 
-# The base directory containing the MATLAB installation
+# The base directory containing the Xilinx installation
 if [ -z "$XILBASE" ];
 then
 	disp "Error: The variable XILBASE must be set to the base Xilinx installation path\n"
 	return 1 2> /dev/null || exit 1
 fi
 
-# Get all existing MATLAB installations to remove them from the path
+
+
+###################################################################
+# Clean the path
+###################################################################
+
+# Get all existing Xilinx installations to remove them from the path
 EXIST_INSTALL=$(dir "$XILBASE/Vivado")
 disp "Detected Xilinx versions:"
 
@@ -56,29 +72,46 @@ MATCH=0
 for d in $EXIST_INSTALL; do
 	disp " $d"
 
-  if [ "$d" == $XILVER ];
-  then
-    MATCH=1
-  fi
+	# See if the desired version is installed
+	if [ "$d" == $XILVER ];
+	then
+		MATCH=1
+	fi
 
+	# Actually remove the path variables
 	path_remove "$XILBASE/Vivado/$d/bin"
 	path_remove "$XILBASE/Vivado_HLS/$d/bin"
 	path_remove "$XILBASE/SDK/$d/bin"
 done
-
+path_remove "$XILBASE/DocNav"
 disp "\n"
 
-# Make sure that the Xilinx version is installed
+
+
+############################################################
+# Make sure that the version is installed
+############################################################
 if [ $MATCH == 0 ];
 then
   disp "Error: The requested version $XILVER is not installed.\n"
   return 1 2> /dev/null || exit 1
 fi
 
+
+
+############################################################
 # Do the configuration
+############################################################
 disp "\tConfiguring for Xilinx $XILVER\n"
 
 # Configure the path
 export PATH="$PATH:$XILBASE/Vivado/$XILVER/bin"
-export PATH="$PATH:$XILBASE/Vivado_HLS/$XILVER/bin"
+
+# Check to see if the HLS directory is separate (it is not for 2018.1, but is for 2017.1)
+if [ -d "$XILBASE/Vivado_HLS/$XILVER/bin" ];
+then
+	export PATH="$PATH:$XILBASE/Vivado_HLS/$XILVER/bin"
+fi
+
 export PATH="$PATH:$XILBASE/SDK/$XILVER/bin"
+export PATH="$PATH:$XILBASE/DocNav"
