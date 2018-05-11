@@ -30,6 +30,45 @@ function disp {
 
 
 ###############################################################
+# Make sure the MATLAB base directory is specified
+###############################################################
+# The base directory containing the MATLAB installation
+if [ -z "$MATBASE" ];
+then
+	disp "Error: The variable MATBASE must be set to the base MATLAB installation path\n"
+	return 1 2> /dev/null || exit 1
+fi
+
+
+
+###############################################################
+# Display the help if requested
+###############################################################
+if [ $# == 0 ];
+then
+	printf "$0 version print\n"
+	printf "The version should be provided as the last 3 characters (e.g. 2017b is 17b)\n"
+	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing\n"
+	printf "this can be used if this script is called from the bashrc scripts (which may have problems when\n"
+	printf "printing occurs inside of them.\n"
+	printf "\n"
+	
+	# Find out what versions of MATLAB are installed
+	EXIST_INSTALL=$(dir $MATBASE)
+	printf "Detected MATLAB versions:"
+
+	for d in $EXIST_INSTALL; do
+		printf " $d"
+	done
+	
+	printf "\n"
+
+	return 0 2> /dev/null || exit 0
+fi
+
+
+
+###############################################################
 # Parse the arguments
 ###############################################################
 
@@ -49,13 +88,6 @@ then
 else
   # The input is the MATLAB version (last 3 characters)
   MATVER="R20$1"
-fi
-
-# The base directory containing the MATLAB installation
-if [ -z "$MATBASE" ];
-then
-	disp "Error: The variable MATBASE must be set to the base MATLAB installation path\n"
-	return 1 2> /dev/null || exit 1
 fi
 
 

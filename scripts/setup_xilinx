@@ -30,6 +30,43 @@ function disp {
 
 
 ###############################################################
+# Make sure the Xilinx base directory is specified
+###############################################################
+if [ -z "$XILBASE" ];
+then
+	disp "Error: The variable XILBASE must be set to the base Xilinx installation path\n"
+	return 1 2> /dev/null || exit 1
+fi
+
+
+
+###############################################################
+# Display the help if requested
+###############################################################
+if [ $# == 0 ];
+then
+	printf "$0 version print\n"
+	printf "The version should be provided as the full string (e.g. 2017.1)\n"
+	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing\n"
+	printf "this can be used if this script is called from the bashrc scripts (which may have problems when\n"
+	printf "printing occurs inside of them.\n"
+	printf "\n"
+	
+	# Find out what versions of Xilinx Vivado tools are installed
+	EXIST_INSTALL=$(dir "$XILBASE/Vivado")
+	printf "Detected Xilinx versions:"
+
+	for d in $EXIST_INSTALL; do
+		printf " $d"
+	done
+	
+	printf "\n"
+
+	return 0 2> /dev/null || exit 0
+fi
+
+
+###############################################################
 # Parse the arguments
 ###############################################################
 
@@ -49,13 +86,6 @@ then
 else
   # The input is the Xilinx version
   XILVER=$1
-fi
-
-# The base directory containing the Xilinx installation
-if [ -z "$XILBASE" ];
-then
-	disp "Error: The variable XILBASE must be set to the base Xilinx installation path\n"
-	return 1 2> /dev/null || exit 1
 fi
 
 
