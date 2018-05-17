@@ -1,0 +1,53 @@
+#!/bin/bash
+
+
+###############################################################
+# Display the help if requested
+###############################################################
+if [ $# == 0 ];
+then
+  printf "$(basename $0) pdfFile bookmarkFile\n"
+  printf "This script will replace the bookmarks inside a PDF file with the supplied bookmarks.\n"
+  printf "\n"
+  printf "The bookmarks must be specified inside a text file containing 3 columns (with tab separation between columns.\n"
+  printf "The first column contains the level of the bookmark, with 1 being the highest. The order of the bookmarks dictate\n"
+  printf "the nesting of the bookmarks (see the example below). The second column contains the title of the bookmark.\n"
+  printf "The third column contains the page number for the bookmark.\n"
+  printf "\n"
+  printf "Sample bookmark hierarchy:\n"
+  printf "    Text file:\n"
+  printf "        1\t Section 1 \t\t 1\n"
+  printf "        2\t Subsection 1.1 \t 2\n"
+  printf "        3\t Subsubsection 1.1.1 \t 3\n"
+  printf "        2\t Subsection 1.2 \t 4\n"
+  printf "        1\t Section 2\t\t 5\n"
+  printf "        2\t Subsection 2.1 \t 6\n"
+  printf "\n"
+  printf "    Resulting bookmark hierarchy:\n"
+  printf "        Document\n"
+  printf "            Section 1 (Page 1)\n"
+  printf "                Subsection 1.1 (Page 2)\n"
+  printf "                    Subsubsection 1.1.1 (Page 3)\n"
+  printf "                Subsection 1.2 (Page 4)\n"
+  printf "            Section 2 (Page 5)\n"
+  printf "                Subsection 2.1 (Page 6)\n"
+  printf "\n"
+
+  exit 0
+fi
+
+
+# Extract the current info
+echo "Reading existing file"
+pdftk "$1" dump_data > index.info.original
+
+# Remove any existing bookmarks from the file
+grep -v Bookmark index.info.original > index.info
+
+# Loop through the csv and create the bookmark lines
+echo "Creating bookmarks"
+awk 'BEGIN{FS="\t"}{print "BookmarkBegin\nBookmarkTitle: "$2"\nBookmarkLevel: "$1"\nBookmarkPageNumber: "$4""}' $2 >> index.info
+
+# Add the bookmarks to the file
+echo "Creating output file"
+pdftk "$1" update_info index.info output output_toc.pdf
