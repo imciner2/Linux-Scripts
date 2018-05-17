@@ -45,7 +45,7 @@ fi
 ###############################################################
 if [ $# == 0 ];
 then
-	printf "$0 version print\n"
+	printf "$(basename $0) version print\n"
 	printf "The version should be provided as the full string (e.g. 2017.1)\n"
 	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing\n"
 	printf "this can be used if this script is called from the bashrc scripts (which may have problems when\n"
