@@ -1,6 +1,26 @@
 #!/bin/bash
 
 
+
+###############################################################
+# Figure out the script directory
+# Code from: https://www.ostricher.com/2014/10/the-right-way-to-get-the-directory-of-a-bash-script/
+###############################################################
+get_script_dir () {
+  SOURCE="${BASH_SOURCE[0]}"
+  # While $SOURCE is a symlink, resolve it
+  while [ -h "$SOURCE" ]; do
+      DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+      SOURCE="$( readlink "$SOURCE" )"
+      # If $SOURCE was a relative symlink (so no "/" as prefix, need to resolve it relative to the symlink base directory
+      [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+  done
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  echo "$DIR"
+}
+
+
+
 ###############################################################
 # Display the help if requested
 ###############################################################
@@ -37,17 +57,72 @@ then
 fi
 
 
-# Extract the current info
-echo "Reading existing file"
-pdftk "$1" dump_data > index.info.original
 
-# Remove any existing bookmarks from the file
-grep -v Bookmark index.info.original > index.info
+###############################################################
+# Determine the software that is installed
+###############################################################
+COMMAND=0
 
-# Loop through the csv and create the bookmark lines
-echo "Creating bookmarks"
-awk 'BEGIN{FS="\t"}{print "BookmarkBegin\nBookmarkTitle: "$2"\nBookmarkLevel: "$1"\nBookmarkPageNumber: "$4""}' $2 >> index.info
+# Determine if chostscript is installed
+GS=$(which gs 2> /dev/null)
+if [ ! -z $GS ];
+then
+  COMMAND=2
+fi
 
-# Add the bookmarks to the file
-echo "Creating output file"
-pdftk "$1" update_info index.info output output_toc.pdf
+# Determine if pdftk is installed, and prefer it over ghostscript
+PDFTK=$(which pdftk 2> /dev/null)
+if [ ! -z $PDFTK ];
+then
+  COMMAND=1
+fi
+
+
+
+###############################################################
+# Run the appropriate command
+###############################################################
+case "$COMMAND" in
+1 )
+  printf "Using pdftk to add the bookmarks.\n"
+  # Use pdftk for the manipulation
+  pdftk "$1" dump_data > index.info.original
+
+  # Remove any existing bookmarks from the file
+  grep -v Bookmark index.info.original > index.info
+
+  # Loop through the csv and create the bookmark lines
+  awk 'BEGIN{FS="\t"}{print "BookmarkBegin\nBookmarkTitle: "$2"\nBookmarkLevel: "$1"\nBookmarkPageNumber: "$3""}' $2 > index.info
+
+  # Add the bookmarks to the file
+  pdftk "$1" update_info index.info output output_toc.pdf
+
+  # Remove those intermediate files
+  rm index.info.original
+  rm index.info
+  ;;
+
+2 )
+  # Use ghostscript for the manipulation
+  printf "Using ghostscript to add the bookmarks.\n"
+
+  # Parse the bookmarks file
+  tac $1 | awk -f "$(get_script_dir)/createBooksmarksFile.awk" > marks.ps
+  tac marks.ps > reversemarks.ps
+
+  # Call ghostscript to update the bookmarks
+  gs -o output.pdf   \
+   -sDEVICE=pdfwrite   \
+    reversemarks.ps \
+   -f $2
+
+  rm marks.ps
+  rm reversemarks.ps
+  ;;
+
+* )
+  # No command was found
+  printf "Error: No PDF manipulation command found. Please install either Ghostscript or pdftk\n"
+  ;;
+
+esac
