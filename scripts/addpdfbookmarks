@@ -107,14 +107,14 @@ case "$COMMAND" in
   printf "Using ghostscript to add the bookmarks.\n"
 
   # Parse the bookmarks file
-  tac $1 | awk -f "$(get_script_dir)/createBooksmarksFile.awk" > marks.ps
+  tac $2 | awk -f "$(get_script_dir)/createBooksmarksFile.awk" > marks.ps
   tac marks.ps > reversemarks.ps
 
   # Call ghostscript to update the bookmarks
   gs -o output.pdf   \
    -sDEVICE=pdfwrite   \
     reversemarks.ps \
-   -f $2
+   -f $1
 
   rm marks.ps
   rm reversemarks.ps
