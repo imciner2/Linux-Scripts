@@ -1,0 +1,31 @@
+# Run the thrid party get scripts
+cd /opt/ipopt/ThirdParty
+cd ASL
+./get.ASL
+cd ../Blas
+./get.Blas
+cd ../Lapack
+./get.Lapack
+cd ../Metis
+./get.Metis
+cd ../Mumps
+./get.Mumps
+
+
+# Setup the IPOPT installation to compile for MATLAB
+cd /opt/ipopt
+mkdir share
+cp Ipopt/contrib/MatlabInterface/MatabInterface.site share/config.site
+
+
+# Compile the IPOPT installation
+./configure
+make
+make test
+make install
+
+
+# Compile the mex file for the interface
+cd Ipopt/contrib/MatlabInterface/src
+make
+
