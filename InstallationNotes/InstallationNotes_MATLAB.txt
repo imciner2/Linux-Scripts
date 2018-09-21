@@ -40,3 +40,30 @@ mv bin/glnxa64/librxtxSerial.so bin/glnxa64/librxtxSerial.so
 # Link in the system-wide rxtx libraries
 ln -s /lib64/rxtx/librxtxSerial.so bin/glnxa64/librxtxSerial.so
 ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
+
+#################################################
+# Make the live script capability work properly #
+#################################################
+# Based on: https://wiki.archlinux.org/index.php/matlab#Addon_manager_not_working
+
+# Relink the libgcrypt library
+ln -fs /usr/lib64/libgcrypt.so.20 sys/jxbrowser-chromium/glnxa64/chromium/libgcrypt.so.11
+
+# Relink several other libraries 
+ln -fs /usr/lib64/libgio-2.0.so.0 cefclient/sys/os/glnxa64/libgio-2.0.so;
+ln -fs /usr/lib64/libgio-2.0.so.0 cefclient/sys/os/glnxa64/libgio-2.0.so.0;
+
+ln -fs /usr/lib64/libglib-2.0.so.0 cefclient/sys/os/glnxa64/libglib-2.0.so;
+ln -fs /usr/lib64/libglib-2.0.so.0 cefclient/sys/os/glnxa64/libglib-2.0.so.0;
+
+ln -fs /usr/lib64/libgmodule-2.0.so.0 cefclient/sys/os/glnxa64/libgmodule-2.0.so;
+ln -fs /usr/lib64/libgmodule-2.0.so.0 cefclient/sys/os/glnxa64/libgmodule-2.0.so.0;
+
+ln -fs /usr/lib64/libgobject-2.0.so.0 cefclient/sys/os/glnxa64/libgobject-2.0.so;
+ln -fs /usr/lib64/libgobject-2.0.so.0 cefclient/sys/os/glnxa64/libgobject-2.0.so.0;
+
+ln -fs /usr/lib64/libgthread-2.0.so.0 cefclient/sys/os/glnxa64/libgthread-2.0.so;
+ln -fs /usr/lib64/libgthread-2.0.so.0 cefclient/sys/os/glnxa64/libgthread-2.0.so.0;
+
+# Relink the libfreetype library as well
+ln -fs /usr/lib64/libfreetype.so.6 bin/glnxa64/libfreetype.so.6
