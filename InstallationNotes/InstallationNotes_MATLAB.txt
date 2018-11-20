@@ -35,11 +35,21 @@ usermod -aG lock $(whoami)
 
 # Get rid of the rxtx libraries which ship with MATLAB
 mv java/jarext/RXTXcomm.jar java/jarext/RXTXcomm.jar.original
-mv bin/glnxa64/librxtxSerial.so bin/glnxa64/librxtxSerial.so
+mv bin/glnxa64/librxtxSerial.so bin/glnxa64/librxtxSerial.so.old
 
 # Link in the system-wide rxtx libraries
 ln -s /lib64/rxtx/librxtxSerial.so bin/glnxa64/librxtxSerial.so
 ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
+
+
+#################################################
+# Make MATLAB use the system glibc library      #
+#################################################
+mv sys/os/glnxa64/libstdc++.so.6 sys/os/glnxa64/libstdc++.so.6.old
+mv sys/os/glnxa64/libgcc_s.so.1 sys/os/glnxa64/libgcc_s.so.1.old
+mv sys/os/glnxa64/libgfortran.so.3 sys/os/glnxa64/libgfortran.so.3.old
+mv sys/os/glnxa64/libquadmath.so.0 sys/os/glnxa64/libquadmath.so.0.old
+
 
 #################################################
 # Make the live script capability work properly #
