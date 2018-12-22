@@ -1,0 +1,4 @@
+#!/bin/bash
+# Stop the FlexLM software running with the Libero license
+
+/opt/flexlm/Libero_LLD/lmutil lmdown -c /opt/flexlm/LiberoLicense/License.dat

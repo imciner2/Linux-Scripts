@@ -1,0 +1,63 @@
+############################
+# Install some needed libraries in 32-bit
+############################
+sudo dnf install glibc.i686 fontconfig.i686 freetype.i686 libgcc.i686 libICE.i686 libpng.i686 libSM.i686 libstdc++.i686 libX11.i686 libXau.i686 libXcursor.i686 libXdmcp.i686 libXext.i686 libXfixes.i686 libXinerama.i686 libXi.i686 motif.i686 libXmu.i686 libXp.i686 libXrandr.i686 libXrender.i686 libXt.i686 zlib.i686 glib2.i686 ksh.x86_64 xorg-x11-fonts-75dpi xorg-x11-fonts-100dpi xorg-x11-fonts-Type1
+
+
+############################
+# Fix some Libero library dependencies
+############################
+
+# All of this is done inside the directory (or equivalent installation folder)
+# /opt/microsemi/Libero_SoC_v11.9/Libero/
+
+# Edit the bin/actel_setup_vars script and modify the libX/MOTIF library version on line 128 (under Linux) to be libXm.so.4 instead of .3
+
+sudo mv lib/libz.so.1 lib/libz.so.1.old
+sudo ln -s /usr/lib/libz.so.1 lib/libz.so.1
+
+
+##############################
+# Fix Modelsim's install
+##############################
+# In order for Modelsim to work on Fedora, the freetype library used must be version 2.4.7
+# The free versions of ModelSim (e.g. the version provided by the Libero tool suite)
+# requires a 32-bit installation
+cd ~/Downloads
+mkdir libfreetype
+cd libfreetype
+wget http://download.savannah.gnu.org/releases/freetype/freetype-2.4.7.tar.gz
+tar -xvf freetype-2.4.7.tar.gz
+
+# Make sure the 32-bit build tools are installed
+sudo dfn install glibc-devel.i686 libgcc.i686 libstdc++-devel.i686 ncurses-devel.i686
+
+# Build the library
+cd freetype-2.4.7
+./configure --build=i686-pc-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+make
+
+# Install the library into the Modelsim directory
+sudo mkdir /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
+sudo cp ~/Downloads/libfreetype/freetype-2.4.7/objs/.libs/libfreetype.so.6.7.2 /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
+cd /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
+sudo ln -s libfreetype.so.6.7.2 libfreetype.so.6
+sudo ln -s libfreetype.so.6 libfreetype.so
+
+# Fix the directory structure so that it is able to launch properly
+sudo ln -s /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/linuxacoem /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/linux_x86_64
+
+# Modify the vco script in the root directory to contain the following lines: (insert before the final exec statements
+# # Add the libfreetype library to the path
+#   LD_LIBRARY_PATH="$dir/lib32:$LD_LIBRARY_PATH"
+
+############################
+# Install the License daemon
+############################
+
+# The license daemon is 32-bit, so install its libraries
+sudo dnf install redhat-lsb-core.i686
+
+# Update the hosts file to include an entry for the computer's hostname 
+# e.g. edit the first line to be
+# 127.0.0.1 localhost *HOSTNAME*

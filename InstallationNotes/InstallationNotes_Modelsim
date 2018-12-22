@@ -1,15 +1,23 @@
 # In order for Modelsim to work on Fedora, the freetype library used must be version 2.4.7
+# The free versions of ModelSim (e.g. the version provided by the Libero tool suite)
+# requires a 32-bit installation.
+# If a 64-bit version is required, then modify the below appropriately
 cd ~/Downloads
+mkdir libfreetype
+cd libfreetype
 wget http://download.savannah.gnu.org/releases/freetype/freetype-2.4.7.tar.gz
 tar -xvf freetype-2.4.7.tar.gz
 
+# Make sure the 32-bit build tools are installed
+sudo dnf install glibc-devel.i686 libgcc.i686 libstdc++-devel.i686 ncurses-devel.i686
+
 # Build the library
 cd freetype-2.4.7
-./configure
+./configure --build=i686-pc-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
 make
 
 # Install the library into the /usr/local directory
-sudo cp ~/Downloads/freetype-2.4.7/objs/.libs/libfreetype.so.6.7.2 /usr/local/lib64 
-cd /usr/local/lib64
+sudo cp ~/Downloads/libfreetype/freetype-2.4.7/objs/.libs/libfreetype.so.6.7.2 /usr/local/lib
+cd /usr/local/lib
 sudo ln -s libfreetype.so.6.7.2 libfreetype.so.6
 sudo ln -s libfreetype.so.6 libfreetype.so

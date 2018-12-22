@@ -1,0 +1,4 @@
+#!/bin/bash
+# Start the FlexLM software with the Libero license
+
+/opt/flexlm/Libero_LLD/lmgrd -c /opt/flexlm/LiberoLicense/License.dat -log /tmp/lmgrd.log
