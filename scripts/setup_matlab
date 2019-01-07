@@ -28,14 +28,13 @@ function disp {
 }
 
 
-
 ###############################################################
 # Make sure the MATLAB base directory is specified
 ###############################################################
 # The base directory containing the MATLAB installation
 if [ -z "$MATBASE" ];
 then
-	disp "Error: The variable MATBASE must be set to the base MATLAB installation path\n"
+	printf "Error: The variable MATBASE must be set to the base MATLAB installation path.\n"
 	return 1 2> /dev/null || exit 1
 fi
 
@@ -90,6 +89,14 @@ else
   MATVER="R20$1"
 fi
 
+
+###############################################################
+# Make sure that the script has been sourced
+###############################################################
+if [ -z "$PS1" ]; then
+    disp "Error: This script must be sourced. Use \"source $(basename "$0")\" instead.\n"
+    return 1 2> /dev/null || exit 1
+fi
 
 
 ###################################################################

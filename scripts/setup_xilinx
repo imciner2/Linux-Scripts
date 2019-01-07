@@ -34,7 +34,7 @@ function disp {
 ###############################################################
 if [ -z "$XILBASE" ];
 then
-	disp "Error: The variable XILBASE must be set to the base Xilinx installation path\n"
+	disp "Error: The variable XILBASE must be set to the base Xilinx installation path.\n"
 	return 1 2> /dev/null || exit 1
 fi
 
@@ -88,6 +88,14 @@ else
   XILVER=$1
 fi
 
+
+###############################################################
+# Make sure that the script has been sourced
+###############################################################
+if [ -z "$PS1" ]; then
+    disp "Error: This script must be sourced. Use \"source $(basename "$0")\" instead.\n"
+    return 1 2> /dev/null || exit 1
+fi
 
 
 ###################################################################
