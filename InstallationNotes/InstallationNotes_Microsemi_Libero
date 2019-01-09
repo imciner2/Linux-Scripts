@@ -51,6 +51,10 @@ sudo ln -s /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/linuxacoem /opt/mi
 # # Add the libfreetype library to the path
 #   LD_LIBRARY_PATH="$dir/lib32:$LD_LIBRARY_PATH"
 
+# Note that the simulation environment will throw the following error when used:
+#     Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file
+# This is harmless and can be ignored 
+
 ############################
 # Install the License daemon
 ############################
