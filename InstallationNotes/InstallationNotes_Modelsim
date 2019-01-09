@@ -8,6 +8,9 @@ cd libfreetype
 wget http://download.savannah.gnu.org/releases/freetype/freetype-2.4.7.tar.gz
 tar -xvf freetype-2.4.7.tar.gz
 
+# These are the commands for installing the required packages on Ubuntu for install 10.2b using a graphical installer
+sudo apt-get install libgcc1:i386 libc6:i386 libXau6:i386 libx11-6:i386 libxext6:i386 libxtst6:i386 libxi6:i386
+
 # Make sure the 32-bit build tools are installed
 sudo dnf install glibc-devel.i686 libgcc.i686 libstdc++-devel.i686 ncurses-devel.i686
 
