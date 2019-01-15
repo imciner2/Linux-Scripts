@@ -28,17 +28,28 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # cd /opt/matlab/version
 
-# Install the uucp package and add the user to the lock groups
-dnf install uucp
+# In Ubuntu, install these packages
+apt-get install librxtx-java uucp
+
+# In Fedora, install these packages
+dnf install rxtx uucp
+
+# Add the user to the uucp group to access the port (and lock files in Ubuntu)
 usermod -aG uucp $(whoami)
+
+# For Fedora, add the user to the lock group to allow access to the lock files
 usermod -aG lock $(whoami)
 
 # Get rid of the rxtx libraries which ship with MATLAB
 mv java/jarext/RXTXcomm.jar java/jarext/RXTXcomm.jar.original
 mv bin/glnxa64/librxtxSerial.so bin/glnxa64/librxtxSerial.so.old
 
-# Link in the system-wide rxtx libraries
+# For Fedora, link in the system-wide rxtx libraries
 ln -s /lib64/rxtx/librxtxSerial.so bin/glnxa64/librxtxSerial.so
+ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
+
+# For Ubuntu, link in the system-wide rxtx libraries
+ln -s /usr/lib/jni/librxtxSerial.so bin/glnxa64/librxtxSerial.so
 ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
 
 
