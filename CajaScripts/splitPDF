@@ -1,0 +1,52 @@
+#!/bin/bash
+# This script is designed to be a Caja script
+# Split the PDF into separate files for each page
+
+# Determine if gs is installed
+GS=$(which gs)
+
+if [ -z $GS ];
+then
+  zenity --error --title="Error" --text="Unable to find the GhostScript executable. Make sure it is installed"
+  exit
+fi
+
+FILES=$CAJA_SCRIPT_SELECTED_FILE_PATHS
+
+# Iterate over each file
+(for f in $FILES
+do
+  # Determine its file type
+  TYPE=$(file -b --mime-type $f)
+  
+  if [ $TYPE != "application/pdf" ];
+  then
+    # This only works on PDF files, throw an error if it is not a PDF
+    zenity --error --title="Not a PDF" --text="$f is not a PDF file. This script only works on PDF files."
+  else
+    # Create the file names and do the conversion
+    NAME=${f%".pdf"}
+    INPUTFILE="$f"
+    OUTPUTFILE="$NAME.pdf"
+
+	NUMPAGES=`gs -q -dNODISPLAY -c "("$f") (r) file runpdfbegin pdfpagecount = quit" 2>/dev/null`
+	COUNTER=1
+	( while [ $COUNTER -le $NUMPAGES ] ; do
+		NEWNAME=$NAME-p$COUNTER.pdf
+		# make the individual pdf page
+		gs -dBATCH -sOutputFile="$NEWNAME" -dFirstPage=$COUNTER -dLastPage=$COUNTER -sDEVICE=pdfwrite "$1" >& /dev/null
+
+		# Compute the progress bar percentage and update the bar
+		PERCENTAGE=$(( (COUNTER * 100) / NUMPAGES))
+		echo "$PERCENTAGE"
+		echo "#$COUNTER out of $NUMPAGES"
+		let COUNTER++
+	done ) | zenity --progress --title="Extracting pages..." --percentage=0 --auto-close --no-cancel
+  fi
+
+  # Compute the progress bar percentage and update the bar
+  PERCENTAGE=$(( (NUMFILE * 100) / NUMFILES))
+  echo "$PERCENTAGE"
+  echo "#$NUMFILE out of $NUMFILES"
+  let NUMFILE++
+done )
