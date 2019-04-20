@@ -17,9 +17,25 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 # Rename the file "ifcfg-*" inside /etc/sysconfig/network-scripts to be "ifcfg-eth0"
 # Change the field for "name" in that file to contain "eth0" instead of the default name
 
-######################################################
-# Make the serial port work on Fedora/Redhat systems #
-######################################################
+
+#########################################################
+# Make MATLAB license work with the new network manager #
+#########################################################
+# From https://bugzilla.redhat.com/show_bug.cgi?id=1387350#c7
+
+# Update the network manager config to disable the randomization of the 
+# MAC address on the wireless card when scanning for networks
+touch /etc/NetworkManager/conf.d/00-no-wifi-scan-rand-mac-address.conf
+echo "[device]" >> /etc/NetworkManager/conf.d/00-no-wifi-scan-rand-mac-address.conf
+echo "wifi.scan-rand-mac-address=0" >> /etc/NetworkManager/conf.d/00-no-wifi-scan-rand-mac-address.conf
+
+# Restart the network manager
+service NetworkManager restart
+
+
+##############################################
+# Make the serial port work on Linux systems #
+##############################################
 
 # Change the rxtx libraries the software uses because the version it comes with
 # is incompatible with Fedora 18 due to changes in the directory permissions.
