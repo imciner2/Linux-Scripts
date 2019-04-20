@@ -2,11 +2,41 @@
 # This script is designed to be a Caja script
 # Join together the selected files in sorted order
 
+# Determine if gs is installed
+GS=$(which gs)
+
+if [ -z $GS ];
+then
+  zenity --error --title="Error" --text="Unable to find the GhostScript executable. Make sure it is installed"
+  exit
+fi
+
+# Get the files and sort them
 FILES=$CAJA_SCRIPT_SELECTED_FILE_PATHS
 
 IFS=$'\n' sorted=($(sort <<<"${FILES[*]}"))
 unset IFS
 
+# Get the output file name
 OUTPUT=$(zenity --entry --title="Output File Name" --entry-text="output.pdf")
 
-pdfjoin $FILES --outfile $OUTPUT --rotateoversize false
+# Actually do the joining
+gs                                              \
+ -o $OUTPUT                                     \
+ -sDEVICE=pdfwrite                              \
+ -dAntiAliasColorImage=false                    \
+ -dAntiAliasGrayImage=false                     \
+ -dAntiAliasMonoImage=false                     \
+ -dAutoFilterColorImages=false                  \
+ -dAutoFilterGrayImages=false                   \
+ -dDownsampleColorImages=false                  \
+ -dDownsampleGrayImages=false                   \
+ -dDownsampleMonoImages=false                   \
+ -dColorConversionStrategy=/LeaveColorUnchanged \
+ -dConvertCMYKImagesToRGB=false                 \
+ -dConvertImagesToIndexed=false                 \
+ -dUCRandBGInfo=/Preserve                       \
+ -dPreserveHalftoneInfo=true                    \
+ -dPreserveOPIComments=true                     \
+ -dPreserveOverprintSettings=true               \
+  $FILES
