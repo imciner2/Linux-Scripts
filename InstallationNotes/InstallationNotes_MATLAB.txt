@@ -17,9 +17,25 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 # Rename the file "ifcfg-*" inside /etc/sysconfig/network-scripts to be "ifcfg-eth0"
 # Change the field for "name" in that file to contain "eth0" instead of the default name
 
-######################################################
-# Make the serial port work on Fedora/Redhat systems #
-######################################################
+
+#########################################################
+# Make MATLAB license work with the new network manager #
+#########################################################
+# From https://bugzilla.redhat.com/show_bug.cgi?id=1387350#c7
+
+# Update the network manager config to disable the randomization of the 
+# MAC address on the wireless card when scanning for networks
+touch /etc/NetworkManager/conf.d/00-no-wifi-scan-rand-mac-address.conf
+echo "[device]" >> /etc/NetworkManager/conf.d/00-no-wifi-scan-rand-mac-address.conf
+echo "wifi.scan-rand-mac-address=0" >> /etc/NetworkManager/conf.d/00-no-wifi-scan-rand-mac-address.conf
+
+# Restart the network manager
+service NetworkManager restart
+
+
+##############################################
+# Make the serial port work on Linux systems #
+##############################################
 
 # Change the rxtx libraries the software uses because the version it comes with
 # is incompatible with Fedora 18 due to changes in the directory permissions.
@@ -28,17 +44,28 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # cd /opt/matlab/version
 
-# Install the uucp package and add the user to the lock groups
-dnf install uucp
+# In Ubuntu, install these packages
+apt-get install librxtx-java uucp
+
+# In Fedora, install these packages
+dnf install rxtx uucp
+
+# Add the user to the uucp group to access the port (and lock files in Ubuntu)
 usermod -aG uucp $(whoami)
+
+# For Fedora, add the user to the lock group to allow access to the lock files
 usermod -aG lock $(whoami)
 
 # Get rid of the rxtx libraries which ship with MATLAB
 mv java/jarext/RXTXcomm.jar java/jarext/RXTXcomm.jar.original
 mv bin/glnxa64/librxtxSerial.so bin/glnxa64/librxtxSerial.so.old
 
-# Link in the system-wide rxtx libraries
+# For Fedora, link in the system-wide rxtx libraries
 ln -s /lib64/rxtx/librxtxSerial.so bin/glnxa64/librxtxSerial.so
+ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
+
+# For Ubuntu, link in the system-wide rxtx libraries
+ln -s /usr/lib/jni/librxtxSerial.so bin/glnxa64/librxtxSerial.so
 ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
 
 
