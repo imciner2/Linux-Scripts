@@ -65,6 +65,8 @@ On_White='\e[47m'       # White
 NC="\e[m"               # Color Reset
 
 ALERT=${BWhite}${On_Red} # Bold White on red background
+TOOLBOX=${BGreen}${On_Blue} # Bold green on blue background
+
 
 #########################################################
 # Format the user string
@@ -94,6 +96,8 @@ if [ -n "${SSH_CONNECTION}" ]; then
     CNX=${BYellow}        # Connected on remote machine, via ssh (good).
 elif [[ "${DISPLAY%%:*}" != "" ]]; then
     CNX=${ALERT}        # Connected on remote machine, not via ssh (bad).
+elif [ -n "${TOOLBOX_CONTAINER}" ]; then
+	CNX=${TOOLBOX}      # Using a toolbox container
 else
     CNX=${BCyan}        # Connected on local machine.
 fi
