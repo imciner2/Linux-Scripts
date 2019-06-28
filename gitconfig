@@ -1,0 +1,47 @@
+[http]
+	sslVerify = true
+[alias]
+	# Display some nice logs
+    last = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' -1
+	l    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ld   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
+	
+	# Amend the current commit (either with/without message
+	amend = commit --amend --no-edit
+	amend-message = commit --amend
+
+	# Update the current branch against the given remote/branch
+	update = "!git fetch --all && git rebase $1"
+	
+	# Format patch/reset all against specified remote/branch
+	remove   = reset --hard
+	patch    = format-patch 
+
+	# Format patch/reset all against current upstream (requires origin)
+	patch-u  = format-patch @{u}
+	remove-u = reset --hard @{u}
+
+	# Show divergence between local branch and its remote counterpart
+	# use git div remote branch
+	div = "!git log --left-right --graph --cherry-pick --oneline $2...$1/$2 #"
+
+[color]
+	interactive = auto
+	ui = true
+	pager = true
+[color "branch"]
+	current = cyan bold
+	local = magenta
+	remote = green
+[color "status"]
+	header = normal
+	added = green bold
+	changed = red bold
+	untracked = cyan
+[color "diff"]
+	meta = yellow
+	frag = magenta
+	old = red bold
+	new = cyan bold
+	commit = blue
+	whitespace = red
