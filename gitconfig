@@ -6,14 +6,16 @@
 	l    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ld   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
 	
-	# Amend the current commit (either with/without message
+	# Amend the current commit (either with/without message)
 	amend = commit --amend --no-edit
 	amend-message = commit --amend
 
 	# Update the current branch against the given remote/branch
+	# use git update remote/branch
 	update = "!git fetch --all && git rebase $1"
 	
 	# Format patch/reset all against specified remote/branch
+	# use git command remote/branch
 	remove   = reset --hard
 	patch    = format-patch 
 
