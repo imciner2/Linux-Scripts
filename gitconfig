@@ -25,7 +25,7 @@
 
 	# Show divergence between local branch and its remote counterpart
 	# use git div remote branch
-	div = "!git log --left-right --graph --cherry-pick --oneline $2...$1/$2 #"
+	div = "!git fetch $1 && git log --left-right --graph --cherry-pick --oneline $2...$1/$2 #"
 
 [color]
 	interactive = auto
