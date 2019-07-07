@@ -1,0 +1,60 @@
+#!/bin/bash
+# Usage: git switch branch
+# Switch to the specified branch and save the working directory.
+# 
+
+
+
+CUR_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+CUR_STASH_NAME="stash/$CUR_BRANCH"
+NEW_STASH_NAME="stash/$1"
+
+function find_branch() {
+    if [[ $(git branch -l | grep $1) ]];
+    then
+	    return 1
+    else
+        return 0
+    fi
+}
+
+function restore_changes() {
+    find_branch $NEW_STASH_NAME
+    if [[ $? == 1 ]]; then
+        git diff $NEW_STASH_NAME~1 $NEW_STASH_NAME | git apply -v
+	git branch -D $NEW_STASH_NAME
+    fi
+}
+
+function save_changes() {
+	git checkout -b $CUR_STASH_NAME
+    git add *
+    git commit -m "stash commit"
+}
+
+
+find_branch $CUR_STASH_NAME
+if [[ $? == 1 ]];
+then
+    echo "Fatal: A stash branch for branch:$CUR_BRANCH already exists"
+	exit 1
+fi
+
+
+# Save the files if there are changes
+if [[ $(git status --porcelain) ]];
+then
+    save_changes $1
+fi
+
+# Switch branches and restore changes
+find_branch $1
+if [[ $? == 1 ]];
+then
+    git checkout $1
+else
+    git checkout -b $1
+fi
+
+restore_changes $1
+
