@@ -11,8 +11,8 @@
 	amend-message = commit --amend
 
 	# Update the current branch against the given remote/branch
-	# use git update remote/branch
-	update = "!git fetch --all && git rebase $1"
+	# use git update remote branch
+	update = "!git fetch --all && git rebase $1 $2 #"
 	
 	# Format patch/reset all against specified remote/branch
 	# use git command remote/branch
@@ -25,7 +25,10 @@
 
 	# Show divergence between local branch and its remote counterpart
 	# use git div remote branch
-	div = "!git fetch $1 && git log --left-right --graph --cherry-pick --oneline $2...$1/$2 #"
+	div = "!git fetch $1 && git log --left-right --graph --cherry-pick --oneline $3...$1/$2 #"
+
+	sta  = status
+	stai = status --ignored
 
 [color]
 	interactive = auto
