@@ -27,8 +27,12 @@
 	# use git div remote branch
 	div = "!git fetch $2 && git log --left-right --graph --cherry-pick --oneline $1...$2/$3 #"
 
+	# Shorten the status commands
 	sta  = status
 	stai = status --ignored
+
+	# Diff with cached files
+	diffc = diff --cached
 
 [color]
 	interactive = auto
