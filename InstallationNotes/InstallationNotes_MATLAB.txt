@@ -104,3 +104,11 @@ ln -fs /usr/lib64/libgthread-2.0.so.0 cefclient/sys/os/glnxa64/libgthread-2.0.so
 
 # Relink the libfreetype library as well
 ln -fs /usr/lib64/libfreetype.so.6 bin/glnxa64/libfreetype.so.6
+
+
+####################################################
+# Fix some library compatibility issues on Fedora  #
+####################################################
+# Provides the libcrypt.so.1 library on Fedora 30
+# See https://fedoraproject.org/wiki/Changes/FullyRemoveDeprecatedAndUnsafeFunctionsFromLibcrypt
+dnf install libxcrypt-compat
