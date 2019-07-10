@@ -24,13 +24,17 @@ sudo ln -s /usr/lib/libz.so.1 lib/libz.so.1
 # The free versions of ModelSim (e.g. the version provided by the Libero tool suite)
 # requires a 32-bit installation
 cd ~/Downloads
+mkdir modelsim
 mkdir libfreetype
 cd libfreetype
 wget http://download.savannah.gnu.org/releases/freetype/freetype-2.4.7.tar.gz
 tar -xvf freetype-2.4.7.tar.gz
 
 # Make sure the 32-bit build tools are installed
-sudo dfn install glibc-devel.i686 libgcc.i686 libstdc++-devel.i686 ncurses-devel.i686
+sudo dnf install glibc-devel.i686 libgcc.i686 libstdc++-devel.i686 ncurses-devel.i686 libxml2-devel.i686 uuid-devel.i686 itstool gperf
+
+# For some reason no .so link was made, so the build of fontconfig later breaks
+sudo ln -s /lib/libuuid.so.1 /lib/libuuid.so
 
 # Build the library
 cd freetype-2.4.7
@@ -39,7 +43,7 @@ make
 
 # Install the library into the Modelsim directory
 sudo mkdir /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
-sudo cp ~/Downloads/libfreetype/freetype-2.4.7/objs/.libs/libfreetype.so.6.7.2 /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
+sudo cp ~/Downloads/modelsim/libfreetype/freetype-2.4.7/objs/.libs/libfreetype.so.6.7.2 /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
 cd /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
 sudo ln -s libfreetype.so.6.7.2 libfreetype.so.6
 sudo ln -s libfreetype.so.6 libfreetype.so
@@ -47,7 +51,26 @@ sudo ln -s libfreetype.so.6 libfreetype.so
 # Fix the directory structure so that it is able to launch properly
 sudo ln -s /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/linuxacoem /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/linux_x86_64
 
-# Modify the vco script in the root directory to contain the following lines: (insert before the final exec statements
+# New versions of libfontconfig do not work with this old libfreetype version, so install an old one
+cd ~/Downloads/modelsim
+mkdir fontconfig
+wget https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.92.tar.gz
+tar -xvf fontconfig-2.12.92.tar.gz
+
+# Build the library
+cd fontconfig-2.12.92/
+export PKG_CONFIG=/usr/bin/pkg-config
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+./configure --build=i686-pc-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32 -L/opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32" --enable-libxml2
+sudo cp ~/Downloads/modelsim/fontconfig/fontconfig-2.12.92/src/.libs/libfontconfig.so.1.11.0 /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
+cd /opt/microsemi/Libero_SoC_v11.9/ModelSim/modeltech/lib32
+sudo ln -s libfontconfig.so.1.11.0 libfontconfig.so.1
+sudo ln -s libfontconfig.so.1 libfontconfig.so
+
+# Clean up the simlink for uuid
+sudo rm /lib/libuuid.so
+
+# Modify the vco script in the root directory to contain the following lines: (insert before the final exec statements)
 # # Add the libfreetype library to the path
 #   LD_LIBRARY_PATH="$dir/lib32:$LD_LIBRARY_PATH"
 
