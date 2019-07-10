@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Display the name of the current branch
+NAME=$(git branch | sed -n -e 's/^\*\(.*\)/\1/p')
+
+echo "Current branch: $NAME"

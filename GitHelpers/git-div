@@ -1,0 +1,16 @@
+#!/bin/bash
+
+USAGE(){
+	echo "git div <branch> <remote> <remote branch>" 1>&2
+	echo ""
+	echo "Display the divergence between the given local branch"
+	echo "and the given remote branch"
+	exit 1
+}
+
+test $# -lt 3 && USAGE
+
+git fetch $2 > /dev/null
+echo "Differences between local branch $1 and branch $3 on remote $2"
+echo " < commits are new on local, > commits are new on remote"
+git log --left-right --graph --cherry-pick --oneline $1...$2/$3
