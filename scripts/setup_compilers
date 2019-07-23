@@ -1,0 +1,157 @@
+#!/bin/bash
+# This script will configure the path and the compiler variables for the specified compiler.
+#
+# To use the intel compiler, the environment variable INTELBASE must be set to the path that contains
+# the startup script (e.g. /opt/intel/parallel_studio_xe_2019).
+
+
+###############################################################
+# Some helper functions
+###############################################################
+
+# A function to only print stuff out when requested
+function disp {
+	if [ $PRINT == 1 ];
+	then
+		printf "$1"
+	fi
+}
+
+function extractVersion {
+	 echo "$($1 --version | grep ^$1 | sed -nr 's/.*\s([0-9]*\.[\.0-9]*).*/\1/p')"
+}
+
+###############################################################
+# Make sure the MATLAB base directory is specified
+###############################################################
+# The base directory containing the MATLAB installation
+if [ -z "$MATBASE" ];
+then
+	printf "Error: The variable MATBASE must be set to the base MATLAB installation path.\n"
+	return 1 2> /dev/null || exit 1
+fi
+
+
+###############################################################
+# Make sure the MATLAB base directory exists
+###############################################################
+if [ ! -d "$MATBASE" ];
+then
+	printf "Error: The directory '$MATBASE' does not exist\n"
+	return 1 2> /dev/null || exit 1
+fi
+
+
+###############################################################
+# Display the help if requested
+###############################################################
+if [ $# == 0 ];
+then
+	printf "$(basename $0) compiler print\n"
+	printf "The compiler to configure (see list below)\n"
+	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing\n"
+	printf "this can be used if this script is called from the bashrc scripts (which may have problems when\n"
+	printf "printing occurs inside of them.\n"
+	printf "\n"
+	
+	printf "Possible compilers:\n"
+	if [ ! -z $(command -v gcc) ];
+	then
+		GCCVER=$(extractVersion gcc)
+		printf "    gcc: $GCCVER\n"
+	fi
+	if [ ! -z $(command -v clang) ];
+	then
+		CLANGVER=$(extractVersion clang)
+		printf "    clang: $CLANGVER\n"
+	fi
+	if [ ! -z $(command -v icc) ];
+	then
+		INTELVER=$(extractVersion icc)
+		printf "    intel: $INTELVER\n"
+	fi
+
+	return 0 2> /dev/null || exit 0
+fi
+
+
+
+###############################################################
+# Parse the arguments
+###############################################################
+
+# Check to see if printing is desired
+if [ -z $2 ];
+then
+	PRINT=1
+else
+	PRINT=0
+fi
+
+# Make sure that the user supplied a version
+if [ -z $1 ];
+then
+  disp "Error: Must supply a compiler name.\n"
+  return 1 2> /dev/null || exit 1
+fi
+
+
+###############################################################
+# Make sure that the script has been sourced
+###############################################################
+if [ -z "$PS1" ]; then
+    disp "Error: This script must be sourced. Use \"source $(basename "$0")\" instead.\n"
+    return 1 2> /dev/null || exit 1
+fi
+
+
+##############################################################
+# Choose the compiler executables
+##############################################################
+case $1 in
+gcc)
+	disp "Using gcc\n"
+	COMP="gcc"
+	COMPXX="g++"
+	;;
+clang)
+	disp "Using clang\n"
+	COMP="clang"
+	COMPXX="clang++"
+	;;
+intel)
+	disp "Using intel compiler\n"
+	COMP="icc"
+	COMPXX="icpc"
+	;;
+*)
+	disp "Error: Unknown compiler\n"
+	return 1 2> /dev/null || exit 1
+	;;
+esac
+
+
+############################################################
+# Make sure that the compiler is installed
+############################################################
+if [ -z $(command -v $COMP) ];
+then
+  disp "Error: The requested C compiler is not installed\n" 
+  return 1 2> /dev/null || exit 1
+fi
+
+if [ -z $(command -v $COMPXX) ];
+then
+	disp "Error: The requested C++ compiler is not installed\n"
+	return 1 2> /dev/null || exit 1
+fi
+
+
+############################################################
+# Do the configuration
+############################################################
+
+# Configure the path
+export CC=$(which $COMP)
+export CXX=$(which $COMPXX)
+
