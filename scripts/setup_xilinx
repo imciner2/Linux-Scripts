@@ -39,6 +39,15 @@ then
 fi
 
 
+###############################################################
+# Make sure the Xilinx base directory exists
+###############################################################
+if [ ! -d "$XILBASE" ];
+then
+    printf "Error: The directory '$XILBASE' does not exist\n"
+    return 1 2> /dev/null || exit 1
+fi
+
 
 ###############################################################
 # Display the help if requested

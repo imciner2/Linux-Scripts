@@ -39,6 +39,15 @@ then
 fi
 
 
+###############################################################
+# Make sure the MATLAB base directory exists
+###############################################################
+if [ ! -d "$MATBASE" ];
+then
+	printf "Error: The directory '$MATBASE' does not exist\n"
+	return 1 2> /dev/null || exit 1
+fi
+
 
 ###############################################################
 # Display the help if requested
