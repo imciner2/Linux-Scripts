@@ -21,26 +21,6 @@ function extractVersion {
 	 echo "$($1 --version | grep ^$1 | sed -nr 's/.*\s([0-9]*\.[\.0-9]*).*/\1/p')"
 }
 
-###############################################################
-# Make sure the MATLAB base directory is specified
-###############################################################
-# The base directory containing the MATLAB installation
-if [ -z "$MATBASE" ];
-then
-	printf "Error: The variable MATBASE must be set to the base MATLAB installation path.\n"
-	return 1 2> /dev/null || exit 1
-fi
-
-
-###############################################################
-# Make sure the MATLAB base directory exists
-###############################################################
-if [ ! -d "$MATBASE" ];
-then
-	printf "Error: The directory '$MATBASE' does not exist\n"
-	return 1 2> /dev/null || exit 1
-fi
-
 
 ###############################################################
 # Display the help if requested
