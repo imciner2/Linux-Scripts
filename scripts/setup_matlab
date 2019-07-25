@@ -56,8 +56,8 @@ if [ $# == 0 ];
 then
 	printf "$(basename $0) version print\n"
 	printf "The version should be provided as the last 3 characters (e.g. 2017b is 17b)\n"
-	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing\n"
-	printf "this can be used if this script is called from the bashrc scripts (which may have problems when\n"
+	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing "
+	printf "this can be used if this script is called from the bashrc scripts (which may have problems when "
 	printf "printing occurs inside of them.\n"
 	printf "\n"
 	
