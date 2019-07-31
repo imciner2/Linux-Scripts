@@ -74,8 +74,11 @@ ln -s /usr/share/java/RXTXcomm.jar java/jarext/RXTXcomm.jar
 #################################################
 mv sys/os/glnxa64/libstdc++.so.6 sys/os/glnxa64/libstdc++.so.6.old
 mv sys/os/glnxa64/libgcc_s.so.1 sys/os/glnxa64/libgcc_s.so.1.old
-mv sys/os/glnxa64/libgfortran.so.3 sys/os/glnxa64/libgfortran.so.3.old
 mv sys/os/glnxa64/libquadmath.so.0 sys/os/glnxa64/libquadmath.so.0.old
+
+# Only perform this step if the system has a libgfortran.so.3 installed
+# Newer gfortran versions have libgfortran.so.5
+mv sys/os/glnxa64/libgfortran.so.3 sys/os/glnxa64/libgfortran.so.3.old
 
 
 #################################################
