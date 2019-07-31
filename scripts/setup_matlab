@@ -102,7 +102,8 @@ fi
 ###############################################################
 # Make sure that the script has been sourced
 ###############################################################
-if [ -z "$PS1" ]; then
+(return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+if [ $SOURCED = 0 ]; then
     disp "Error: This script must be sourced. Use \"source $(basename "$0")\" instead.\n"
     return 1 2> /dev/null || exit 1
 fi
