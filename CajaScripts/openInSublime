@@ -1,0 +1,9 @@
+#!/bin/bash
+# This script is designed to be a Caja script
+# Open the current folder in Sublime Text
+
+# Get the selected path
+CURR_DIR=${CAJA_SCRIPT_CURRENT_URI#file://}
+
+# Open the terminal
+sublime_text -n $CURR_DIR &
