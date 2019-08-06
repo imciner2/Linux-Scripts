@@ -8,18 +8,19 @@
 ###############################################################
 # Some helper functions
 ###############################################################
-
-# A function to only print stuff out when requested
-function disp {
-	if [ $PRINT == 1 ];
-	then
-		printf "$1"
-	fi
-}
+source helpers.sh
 
 function extractVersion {
 	 echo "$($1 --version | grep ^$1 | sed -nr 's/.*\s([0-9]*\.[\.0-9]*).*/\1/p')"
 }
+
+# Setup printing
+disp_setup $2
+
+
+# Start the script
+for dummy in once;
+do
 
 
 ###############################################################
@@ -27,52 +28,41 @@ function extractVersion {
 ###############################################################
 if [ $# == 0 ];
 then
-	printf "$(basename $0) compiler print\n"
-	printf "The compiler to configure (see list below)\n"
-	printf "Print is an optional argument for if anything should be printed. When 0, it will disable printing "
-	printf "this can be used if this script is called from the bashrc scripts (which may have problems when "
-	printf "printing occurs inside of them.\n"
-	printf "\n"
-	
-	printf "Possible compilers:\n"
+	disp "$(basename $0) compiler print\n"
+	disp "The compiler to configure (see list below)\n"
+	disp "Print is an optional argument for if anything should be printed. When 0, it will disable printing "
+	disp "this can be used if this script is called from the bashrc scripts (which may have problems when "
+	disp "printing occurs inside of them.\n"
+	disp "\n"
+
+	disp "Possible compilers:\n"
 	if [ ! -z $(command -v gcc) ];
 	then
 		GCCVER=$(extractVersion gcc)
-		printf "    gcc: $GCCVER\n"
+		disp "    gcc: $GCCVER\n"
 	fi
 	if [ ! -z $(command -v clang) ];
 	then
 		CLANGVER=$(extractVersion clang)
-		printf "    clang: $CLANGVER\n"
+		disp "    clang: $CLANGVER\n"
 	fi
 	if [ ! -z $(command -v icc) ];
 	then
 		INTELVER=$(extractVersion icc)
-		printf "    intel: $INTELVER\n"
+		disp "    intel: $INTELVER\n"
 	fi
 
-	return 0 2> /dev/null || exit 0
+	break
 fi
 
 
-
 ###############################################################
-# Parse the arguments
+# Make sure that the user supplied a compiler name
 ###############################################################
-
-# Check to see if printing is desired
-if [ -z $2 ];
-then
-	PRINT=1
-else
-	PRINT=0
-fi
-
-# Make sure that the user supplied a version
 if [ -z $1 ];
 then
-  disp "Error: Must supply a compiler name.\n"
-  return 1 2> /dev/null || exit 1
+  disp_err "Must supply a compiler name."
+  break
 fi
 
 
@@ -81,8 +71,8 @@ fi
 ###############################################################
 (return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
 if [ $SOURCED = 0 ]; then
-    disp "Error: This script must be sourced. Use \"source $(basename "$0")\" instead.\n"
-    return 1 2> /dev/null || exit 1
+  disp_err "This script must be sourced. Use \"source $(basename "$0")\" instead."
+	break
 fi
 
 
@@ -91,23 +81,23 @@ fi
 ##############################################################
 case $1 in
 gcc)
-	disp "Using gcc\n"
+	disp "Using gcc $(extractVersion gcc)\n"
 	COMP="gcc"
 	COMPXX="g++"
 	;;
 clang)
-	disp "Using clang\n"
+	disp "Using clang $(extractVersion clang)\n"
 	COMP="clang"
 	COMPXX="clang++"
 	;;
 intel)
-	disp "Using intel compiler\n"
+	disp "Using intel compiler $(extractVersion icc)\n"
 	COMP="icc"
 	COMPXX="icpc"
 	;;
 *)
-	disp "Error: Unknown compiler\n"
-	return 1 2> /dev/null || exit 1
+	disp_err "Unknown compiler."
+	break
 	;;
 esac
 
@@ -117,22 +107,30 @@ esac
 ############################################################
 if [ -z $(command -v $COMP) ];
 then
-  disp "Error: The requested C compiler is not installed\n" 
-  return 1 2> /dev/null || exit 1
+  disp_err "The requested C compiler is not installed."
+  break
 fi
 
 if [ -z $(command -v $COMPXX) ];
 then
-	disp "Error: The requested C++ compiler is not installed\n"
-	return 1 2> /dev/null || exit 1
+	disp_err "The requested C++ compiler is not installed."
+	break
 fi
 
 
 ############################################################
 # Do the configuration
 ############################################################
-
-# Configure the path
 export CC=$(which $COMP)
 export CXX=$(which $COMPXX)
 
+
+# Exit the script
+break
+done
+
+if [[ -z $ECODE ]]
+then
+  ECODE=0
+fi
+return $ECODE 2> /dev/null || exit $ECODE
