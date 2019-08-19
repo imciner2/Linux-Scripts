@@ -14,6 +14,10 @@ function extractVersion {
 	 echo "$($1 --version | grep ^$1 | sed -nr 's/.*\s([0-9]*\.[\.0-9]*).*/\1/p')"
 }
 
+function extractVersion_intel {
+	echo "$(bash -c "source $INTELBASE/bin/psxevars.sh >> /dev/null; icc --version" | grep ^icc | sed -nr 's/.*\s([0-9]*\.[\.0-9]*).*/\1/p')"
+}
+
 # Setup printing
 disp_setup $2
 
@@ -46,9 +50,12 @@ then
 		CLANGVER=$(extractVersion clang)
 		disp "    clang: $CLANGVER\n"
 	fi
-	if [ ! -z $(command -v icc) ];
+
+	# Test for the intel compiler
+	INTELVER=$(bash -c "source $INTELBASE/bin/psxevars.sh >> /dev/null; command -v icc")
+	if [ ! -z $INTELVER ];
 	then
-		INTELVER=$(extractVersion icc)
+		INTELVER=$(extractVersion_intel)
 		disp "    intel: $INTELVER\n"
 	fi
 
@@ -91,7 +98,8 @@ clang)
 	COMPXX="clang++"
 	;;
 intel)
-	disp "Using intel compiler $(extractVersion icc)\n"
+	disp "Using intel compiler $(extractVersion_intel)\n"
+    source $INTELBASE/bin/psxevars.sh ""
 	COMP="icc"
 	COMPXX="icpc"
 	;;
