@@ -15,6 +15,17 @@ function path_remove {
   PATH=${PATH/%":$1"/} # delete any instance at the end
 }
 
+###############################################################
+# A function to remove a directory and all its sub directories
+# from the path
+#
+# @param $1 the base path to remove
+###############################################################
+function path_remove_basedir {
+  ESC_PATH=$(sed 's/[\/&]/\\&/g' <<< $1)
+  SED_STR='s/\('$ESC_PATH'[^:]\+:\)*//g'
+  PATH=$(sed $SED_STR <<< $PATH)
+}
 
 ###############################################################
 # A function to only print stuff out when requested
