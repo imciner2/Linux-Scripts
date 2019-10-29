@@ -93,6 +93,18 @@ print_cur_ver "${EXIST_INSTALL[@]}"
 ###################################################################
 # Clean the path
 ###################################################################
+path_remove_basedir "$XILBASE"
+
+if [ $XILVER == "none" ];
+then
+	disp "Removing Xilinx tools from path\n"
+	break;
+fi
+
+
+###################################################################
+# Find if the requested version is installed
+###################################################################
 MATCH=0
 for d in $EXIST_INSTALL; do
 	# See if the desired version is installed
@@ -100,12 +112,6 @@ for d in $EXIST_INSTALL; do
 	then
 		MATCH=1
 	fi
-
-	# Actually remove the path variables
-	path_remove "$XILBASE/Vivado/$d/bin"
-	path_remove "$XILBASE/Vivado_HLS/$d/bin"
-	path_remove "$XILBASE/SDK/$d/bin"
-  path_remove "$XILBASE/DocNav"
 done
 
 
@@ -124,21 +130,12 @@ fi
 ############################################################
 disp "Configuring for Xilinx $XILVER\n"
 
-# Configure the path
-export PATH="$PATH:$XILBASE/Vivado/$XILVER/bin"
+# Call the Xilinx settings script to configure the environment
+source $XILBASE/Vivado/$XILVER/settings64.sh
 
-# Check to see if the HLS directory is separate (it is not for 2018.1, but is for 2017.1)
-if [ -d "$XILBASE/Vivado_HLS/$XILVER/bin" ];
-then
-	export PATH="$PATH:$XILBASE/Vivado_HLS/$XILVER/bin"
-fi
-
-export PATH="$PATH:$XILBASE/SDK/$XILVER/bin"
-export PATH="$PATH:$XILBASE/DocNav"
-
-
-
+############################################################
 # Exit the script
+############################################################
 break
 done
 
