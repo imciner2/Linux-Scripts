@@ -1,0 +1,9 @@
+{
+	"extensions":
+	[
+		"vhdl",
+		"vht",
+		"vhd"
+	],
+  "vhdl.hierarchy_new_window" : true  // True to open a new window to display the module hierarchy
+}

@@ -1,0 +1,36 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ANSIescape",
+		"ARM Assembly",
+		"BetterFindBuffer",
+		"BetterSwitchHeaderImplementation",
+		"Clang Format",
+		"CMakeEditor",
+		"Debugger",
+		"EasyClangComplete",
+		"FlowTree",
+		"Git blame",
+		"GitDiffView",
+		"GitGutter",
+		"Highlight Build Errors",
+		"LiveReload",
+		"MarkdownPreview",
+		"NASM x86 Assembly",
+		"Outline",
+		"Package Control",
+		"Path Tools",
+		"Smart VHDL",
+		"sublime-text-2-buildview",
+		"Theme - Spacegray",
+		"x86 and x86_64 Assembly",
+		"Zeal"
+	],
+	"repositories":
+	[
+	]
+}

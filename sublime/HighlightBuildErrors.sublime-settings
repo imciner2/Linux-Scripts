@@ -1,0 +1,25 @@
+{
+  // the plugin tests each regex and stops at the first match
+  // "scope" is a key in the .tmTheme file
+  // "display" can be "fill", "outline", "solid_underline", "stippled_underline" or "squiggly_underline"
+  "colors": [
+    {
+      "regex": "^warning:*",
+      "scope": "entity.other.attribute-name",
+      "display": "squiggly_underline",
+      "icon": "Packages/Highlight Build Errors/warning.png"
+    },
+    {
+      "regex": "^error:*",
+      "scope": "entity.other.attribute-name",
+      "display": "fill",
+      "icon": "Packages/Highlight Build Errors/error.png"
+    },
+    {
+      "regex": "^note:*",
+      "scope": "entity.other.attribute-name",
+      "display": "stippled_underline",
+      "icon": "Packages/Highlight Build Errors/information.png"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+[
+  { "keys": ["shift+f12"], "command": "ecc_goto_declaration"},
+  { "keys": ["ctrl+space"], "command": "ecc_show_popup_info"},
+  { "keys": ["ctrl+alt+c"], "command": "ansi_color_build", "args": {"kill": true} },
+]

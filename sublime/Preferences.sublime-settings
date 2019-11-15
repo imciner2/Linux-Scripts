@@ -1,0 +1,26 @@
+{
+	"added_words":
+	[
+		"quadcopter"
+	],
+	"bold_folder_labels": true,
+	"bring_window_to_front_on_pause": true,
+	"color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
+	"debug.open_at_startup": false,
+	"ensure_newline_at_eof_on_save": true,
+	"fade_fold_buttons": false,
+	"font_size": 10,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"show_debug_text": false,
+	"show_panel_on_build": true,
+	"show_panel_on_failed_build_only": false,
+	"tab_size": 2,
+	"theme": "Spacegray.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
+}
