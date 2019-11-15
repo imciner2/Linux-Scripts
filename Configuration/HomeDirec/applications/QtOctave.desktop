@@ -1,9 +1,0 @@
-[Desktop Entry]
-Categories=;
-Comment=GUI for GNU Octave
-Exec=qtoctave
-Hidden=false
-Icon=qtoctave
-Name=QtOctave
-Type=Application
-X-Desktop-File-Install-Version=0.20
