@@ -93,6 +93,18 @@ print_cur_ver "${EXIST_INSTALL[@]}"
 ###################################################################
 # Clean the path
 ###################################################################
+path_remove_basedir "$MATBASE"
+
+if [ $1 == "none" ];
+then
+  disp "Removing MATLAB from the path\n"
+  break
+fi
+
+
+###################################################################
+# Find if the correct version is installed
+###################################################################
 MATCH=0
 for d in $EXIST_INSTALL; do
   # See if the desired version is installed
@@ -100,9 +112,6 @@ for d in $EXIST_INSTALL; do
   then
     MATCH=1
   fi
-
-  # Actually remove the path variables
-  path_remove "$MATBASE/$d/bin"
 done
 
 
@@ -122,7 +131,7 @@ fi
 disp "Configuring for MATLAB $MATVER\n"
 
 # Configure the path
-export PATH="$PATH:$MATBASE/$MATVER/bin"
+export PATH="$MATBASE/$MATVER/bin:$PATH"
 export MATLAB_JAVA="$MATBASE/$MATVER/sys/java/jre/glnxa64/jre"
 
 #Configure a variable for other use

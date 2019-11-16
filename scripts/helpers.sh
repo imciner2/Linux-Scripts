@@ -23,7 +23,7 @@ function path_remove {
 ###############################################################
 function path_remove_basedir {
   ESC_PATH=$(sed 's/[\/&]/\\&/g' <<< $1)
-  SED_STR='s/\('$ESC_PATH'[^:]\+:\)*//g'
+  SED_STR='s/\('$ESC_PATH'[^:]\+:*\)*//g'
   PATH=$(sed $SED_STR <<< $PATH)
 }
 
