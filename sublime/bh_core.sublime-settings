@@ -1,0 +1,5 @@
+{
+    // Experimental: Creates a visible bar at the beginning of all lines between
+    // multiline bracket spans.
+    "content_highlight_bar": true,
+}
