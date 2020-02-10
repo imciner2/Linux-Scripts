@@ -1,0 +1,6 @@
+{
+    // If true, every time you save a CMakeLists.txt file, or a CMakeCache.txt
+    // file, or make changes to the "cmake" dictionary in the project settings,
+    // the "Configure" command will run.
+    "configure_on_save": false,
+}

@@ -1,0 +1,12 @@
+// SublimeLinter Settings - User
+{
+    "linters":
+    {
+        "annotations":
+        {
+            "warnings":
+            ["@todo", "TODO", "FIX"]
+            //"errors": ["WHAT?", "OMG!"]
+        }
+    }
+}

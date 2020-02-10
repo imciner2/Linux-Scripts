@@ -1,0 +1,26 @@
+{
+	"file_history":
+	[
+		"/home/imcinerney/dev/kicad/code/master/include/fctsys.h",
+		"/home/imcinerney/dev/kicad/code/master/include/lib_tree_item.h",
+		"/home/imcinerney/dev/kicad/code/master/include/board_printout.h",
+		"/home/imcinerney/dev/kicad/code/master/3d-viewer/3d_rendering/ccamera.h",
+		"/home/imcinerney/dev/kicad/code/master/3d-viewer/3d_rendering/3d_render_raytracing/cmaterial.h",
+		"/home/imcinerney/dev/kicad/code/master/3d-viewer/3d_rendering/ctrack_ball.h",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/tools/pcb_tool_base.h",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/router/pns_node.h",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/pcad2kicadpcb_plugin/pcb_callbacks.h",
+		"/home/imcinerney/dev/kicad/code/master/3d-viewer/3d_rendering/ccamera.h",
+		"/home/imcinerney/dev/kicad/code/master/eeschema/project_rescue.h",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/tools/pcb_tool_base.h",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/router/pns_node.cpp",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/tools/zone_create_helper.h",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/tools/drawing_tool.cpp",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/tools/microwave_tool.cpp",
+		"/home/imcinerney/dev/kicad/code/master/pcbnew/tools/footprint_editor_tools.cpp",
+		"/home/imcinerney/dev/kicad/code/master/qa/pcbnew_tools/tools/drc_tool/drc_tool.cpp",
+		"/home/imcinerney/dev/kicad/code/master/include/widgets/layer_box_selector.h",
+		"/home/imcinerney/dev/kicad/code/master/3d-viewer/3d_rendering/3d_render_raytracing/cmaterial.h",
+		"/home/imcinerney/dev/kicad/code/master/include/tool/tool_event.h"
+	]
+}

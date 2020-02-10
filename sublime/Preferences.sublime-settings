@@ -19,7 +19,7 @@
 	"show_debug_text": false,
 	"show_panel_on_build": true,
 	"show_panel_on_failed_build_only": false,
-	"tab_size": 2,
+	"tab_size": 4,
 	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true

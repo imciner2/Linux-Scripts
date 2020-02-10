@@ -5,12 +5,13 @@
 	],
 	"installed_packages":
 	[
-		"ANSIescape",
 		"ARM Assembly",
 		"BetterFindBuffer",
 		"BetterSwitchHeaderImplementation",
 		"BracketHighlighter",
 		"Clang Format",
+		"CMake",
+		"CMakeBuilder",
 		"CMakeEditor",
 		"Debugger",
 		"EasyClangComplete",
@@ -20,6 +21,7 @@
 		"GitDiffView",
 		"GitGutter",
 		"Highlight Build Errors",
+		"iOpener",
 		"LiveReload",
 		"MarkdownPreview",
 		"Matlab Completions",
@@ -32,6 +34,8 @@
 		"smartifdef",
 		"SmartNewWindow",
 		"sublime-text-2-buildview",
+		"SublimeLinter",
+		"SublimeLinter-annotations",
 		"Theme - Spacegray",
 		"x86 and x86_64 Assembly",
 		"Zeal"
