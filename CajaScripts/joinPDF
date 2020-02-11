@@ -27,6 +27,7 @@ gs                                              \
  -dAntiAliasColorImage=false                    \
  -dAntiAliasGrayImage=false                     \
  -dAntiAliasMonoImage=false                     \
+ -dAutoRotatePages=false                        \
  -dAutoFilterColorImages=false                  \
  -dAutoFilterGrayImages=false                   \
  -dDownsampleColorImages=false                  \
