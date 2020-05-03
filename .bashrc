@@ -5,6 +5,13 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then 
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi  
+export PATH
+
 # Read in the machine specific .bashrc information if it exists
 if [ -e ~/.bashrc_custom ]; then
     . ~/.bashrc_custom
