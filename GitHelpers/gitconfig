@@ -5,12 +5,12 @@
 	b = branch -a
 
     # Display some nice logs
-    last = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' -1
-	l    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	ld   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
-    ls   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --name-status
-    lol  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate
-    lola = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --all
+    last = log --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' -1
+	l    = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit
+	ld   = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit -p
+    ls   = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit --name-status
+    lol  = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit --decorate
+    lola = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit --decorate --all
 
 	# Amend the current commit (either with/without message)
 	amend = commit --amend --no-edit
