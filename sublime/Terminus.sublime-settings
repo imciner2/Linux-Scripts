@@ -1,0 +1,18 @@
+[
+    {
+        "default_config": {
+            "linux": "Bash",    // login shell
+            "osx": "Bash",      // login shell
+            "windows": "Command Prompt"
+        },
+        "shell_configs": [
+            {
+                "name": "NonloginBash",
+                "cmd": ["bash", "-i"],
+                "env": {},
+                "enable": true,
+                "platforms": ["linux"]
+            }
+        ]
+    }
+]

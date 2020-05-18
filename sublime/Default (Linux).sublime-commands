@@ -1,0 +1,87 @@
+[
+    {
+        "caption": "Terminus: Open Julia Nightly",
+        "command": "terminus_open",
+        "args"   : {
+            "shell_cmd": "\\$HOME/dev/julia/main/master/usr/bin/julia",
+            "cwd": "${file_path:${folder}}",
+            "title": "Julia Nightly  REPL",
+            "pre_window_hooks": [
+                ["focus_group", {"group": 1}]
+            ],
+            "env": {
+				"JULIA_NUM_THREADS": "4",
+				"JULIA_EDITOR": "sublime_text"
+			},
+        }
+    },
+    {
+        "caption": "Terminus: Open Julia 1.5",
+        "command": "terminus_open",
+        "args"   : {
+            "shell_cmd": "julia1.5",
+            "cwd": "${file_path:${folder}}",
+            "title": "Julia 1.5 REPL",
+            "pre_window_hooks": [
+                ["focus_group", {"group": 1}]
+            ],
+            "env": {
+				"JULIA_NUM_THREADS": "4",
+				"JULIA_EDITOR": "sublime_text"
+			},
+        }
+    },
+    {
+        "caption": "Terminus: Open Julia 1.4",
+        "command": "terminus_open",
+        "args"   : {
+            "shell_cmd": "julia1.4",
+            "cwd": "${file_path:${folder}}",
+            "title": "Julia 1.4 REPL",
+            "pre_window_hooks": [
+                ["focus_group", {"group": 1}]
+            ],
+            "env": {
+				"JULIA_NUM_THREADS": "4",
+				"JULIA_EDITOR": "sublime_text"
+			},
+        }
+    },
+    {
+        "caption": "Terminus: Open KiCad",
+        "command": "terminus_open",
+
+        "args"   : {
+            "cmd": "${project_path}/build/debug/kicad/kicad",
+            "cwd": "${project_path}/build/debug",
+            "config_name": "Bash",
+            "title": "Running KiCad",
+            "pre_window_hooks": [ ["focus_group", {"group": 1}] ],
+            //"env":
+            //{
+            //    "ASAN_OPTIONS": "check_initialization_order=1:detect_leaks=1:detect_stack_use_after_return=1:detect_invalid_pointer_pairs=2:strip_path_prefix=\"$HOME/Documents/dev/kicad/code\"",
+            //    "CTEST_OUTPUT_ON_FAILURE": "1",
+            //    "KICAD_RUN_FROM_BUILD_DIR": "1",
+            //    "LSAN_OPTIONS": "suppressions=\"$HOME/dev/kicad/code/_buildTools/leak_suppress\""
+            //}
+        },
+    }
+            /*{
+                "name": "Eeschema",
+                "shell_cmd": "eeschema/eeschema"
+            },
+            {
+                "name": "Pcbnew",
+                "shell_cmd": "pcbnew/pcbnew"
+            },
+            {
+                "name": "Page Layout Editor",
+                "shell_cmd": "pagelayout_editor/pl_editor"
+            },
+            {
+                "name": "PCB Calculator",
+                "shell_cmd": "pcb_calculator/pcb_calculator"
+            },
+        ],
+        "working_dir": "${project_path}/build/debug"*/
+]

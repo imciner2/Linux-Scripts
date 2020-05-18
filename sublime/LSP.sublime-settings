@@ -1,0 +1,120 @@
+{
+	"clients":
+	{
+		"clangd":
+		{
+			"command":
+			[
+				"clangd",
+				"-log=verbose"
+			],
+			"enabled": "true",
+			"languages":
+			[
+				{
+					"languageId": "c",
+					"scopes":
+					[
+						"source.c"
+					],
+					"syntaxes":
+					[
+						"Packages/C++/C.sublime-syntax"
+					]
+				},
+				{
+					"languageId": "cpp",
+					"scopes":
+					[
+						"source.c++"
+					],
+					"syntaxes":
+					[
+						"Packages/C++/C++.sublime-syntax"
+					]
+				},
+				{
+					"languageId": "objective-c",
+					"scopes":
+					[
+						"source.objc"
+					],
+					"syntaxes":
+					[
+						"Packages/Objective-C/Objective-C.sublime-syntax"
+					]
+				},
+				{
+					"languageId": "objective-cpp",
+					"scopes":
+					[
+						"source.objc++"
+					],
+					"syntaxes":
+					[
+						"Packages/Objective-C/Objective-C++.sublime-syntax"
+					]
+				}
+			]
+		},
+		"julials":
+		{
+			"command":
+			[
+				"julia1.5",
+				"--startup-file=no",
+				"--history-file=no",
+				"-e",
+			    "using Pkg; using LanguageServer; using LanguageServer.SymbolServer; env_path=dirname(Pkg.Types.Context().env.project_file); server=LanguageServer.LanguageServerInstance(stdin,stdout,env_path); run(server)"
+			],
+			"enabled": true,
+			"languageId": "julia",
+			"scopes":
+			[
+				"source.julia"
+			],
+			"settings":
+			{
+				"julia":
+				{
+					"format":
+					{
+						"calls": true,
+						"comments": true,
+						"curly": true,
+						"docs": true,
+						"indent": 4,
+						"indents": true,
+						"iterOps": true,
+						"kw": true,
+						"lineends": false,
+						"ops": true,
+						"tuples": true
+					},
+					"lint":
+					{
+						"call": false,
+						"constif": true,
+						"datadecl": false,
+						"iter": true,
+						"lazy": true,
+						"missingrefs": true,
+						"modname": true,
+						"nothingcomp": false,
+						"pirates": true,
+						"run": true,
+						"typeparam": true,
+						"useoffuncargs": true
+					}
+				}
+			},
+			"syntaxes":
+			[
+				"Packages/Julia/Julia.sublime-syntax"
+			]
+		}
+	},
+	"log_debug": true,
+	"log_payloads": true,
+	"log_stderr": true
+}
