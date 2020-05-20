@@ -1,5 +1,57 @@
 [
-  { "keys": ["shift+f12"], "command": "ecc_goto_declaration"},
-  { "keys": ["ctrl+space"], "command": "ecc_show_popup_info"},
-  { "keys": ["ctrl+alt+c"], "command": "ansi_color_build", "args": {"kill": true} },
+    { "keys": ["shift+f12"], "command": "ecc_goto_declaration"},
+    { "keys": ["ctrl+space"], "command": "ecc_show_popup_info"},
+
+    // Send code to display help information.
+    {
+        "keys": ["ctrl+shift+x", "ctrl+h"], "command": "send_code",
+        "args": {"cmd": "REPL.@repl $selection"},
+        "context": [
+            { "key": "selector", "operator": "equal", "operand": "source.julia" }
+        ]
+    },
+
+    // Send code to display help information.
+    {
+        "keys": ["ctrl+shift+x", "ctrl+alt+h"], "command": "send_code",
+        "args": {"cmd": "?$selection"},
+        "context": [
+            { "key": "selector", "operator": "equal", "operand": "source.julia" }
+        ]
+    },
+
+    // Send code to change the working folder to that holding the current Julia file
+    {
+        "keys": ["ctrl+shift+x", "ctrl+f"], "command": "send_code",
+        "args": {"cmd": "cd(\"$file_path\")"},
+        "context": [
+            { "key": "selector", "operator": "equal", "operand": "source.julia" }
+        ]
+    },
+
+    // This key binding gives access to code evaluation. A current line,
+    // or a selection is passed to the terminal for evaluation
+    // (the command belongs to the SendCode package).
+    {
+        "keys": ["shift+enter"], "command": "send_code",
+        "context": [
+            { "key": "selector", "operator": "equal", "operand": "source" }
+        ]
+    },
+
+    // To make the copy and paste keys work in the Terminus window
+    // (otherwise they are ctrl+shift+c, ctrl+shift+v)
+    { "keys": ["ctrl+c"], "command": "terminus_copy",
+        "context": [
+            { "key": "terminus_view" },
+            { "key": "terminus_view.natural_keyboard" },
+            { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+        ]
+    },
+    { "keys": ["ctrl+v"], "command": "terminus_paste",
+        "context": [
+            { "key": "terminus_view" },
+            { "key": "terminus_view.natural_keyboard" }
+        ]
+    },
 ]

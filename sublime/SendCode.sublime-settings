@@ -1,0 +1,8 @@
+{
+    "prog": "terminus",
+
+    "julia" : {
+        "prog": "terminus",
+        "bracketed_paste_mode": false
+    }
+}

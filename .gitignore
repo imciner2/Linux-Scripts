@@ -1,6 +1,7 @@
 # Ignore the temporary variables
 *.swp
 *.~
+*.DS_Store
 
 # This contains an OAuth token, so let sublime regenerate it
 sublime/MarkdownPreview.sublime-settings

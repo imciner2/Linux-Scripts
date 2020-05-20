@@ -1,0 +1,4 @@
+defaults.pcm.!card front
+defaults.ctl.!card front
+defaults.pcm.!device 0
+defaults.ctl.!device 0
