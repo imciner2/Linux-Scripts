@@ -2,6 +2,21 @@
     { "keys": ["shift+f12"], "command": "ecc_goto_declaration"},
     { "keys": ["ctrl+space"], "command": "ecc_show_popup_info"},
 
+    // Go To Definition
+    {"keys": ["f2"], "command": "lsp_symbol_definition", "context": [{"key": "setting.lsp_active"}]},
+
+    // Go To Type Definition
+    {"keys": ["f3"], "command": "lsp_symbol_type_definition", "context": [{"key": "setting.lsp_active"}]},
+
+    // Go To Declaration
+    {"keys": ["f4"], "command": "lsp_symbol_declaration", "context": [{"key": "setting.lsp_active"}]},
+
+    // Go To Implementation
+    {"keys": ["f5"], "command": "lsp_symbol_implementation", "context": [{"key": "setting.lsp_active"}]},
+
+    // Document Symbols (a replacement for ST's "Goto Symbol")
+    {"keys": ["ctrl+r"], "command": "lsp_document_symbols", "context": [{"key": "setting.lsp_active"}]},
+
     // Send code to display help information.
     {
         "keys": ["ctrl+shift+x", "ctrl+h"], "command": "send_code",

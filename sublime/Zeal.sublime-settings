@@ -20,6 +20,9 @@
     "CSS": {"lang": "css", "zeal_lang": "css"},
     "PHP": {"lang": "php", "zeal_lang": "php"},
     "Python": {"lang": "python", "zeal_lang": "python"},
-    "Ruby": {"lang": "ruby", "zeal_lang":"ruby"}
+    "Ruby": {"lang": "ruby", "zeal_lang":"ruby"},
+    "Julia": {"lang": "julia", "zeal_lang": "julia"},
+    "CMake": {"lang": "cmake", "zeal_lang": "cmake"},
+    "C++": {"lang": "c++", "zeal_lang": "c++"}
   }
 }
