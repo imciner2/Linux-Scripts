@@ -1,0 +1,10 @@
+[Unit]
+Description=Apple magic keyboard layout fixer
+
+[Service]
+ExecStart=%h/local/bin/fixKeyboard.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

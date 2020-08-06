@@ -1,0 +1,8 @@
+// This keymap will restore the numpad enter key on an Apple Magic keyboad with UK layout
+xkb_keymap {
+    xkb_keycodes  { include "evdev+aliases(qwerty)" };
+    xkb_types     { include "complete"  };
+    xkb_compat    { include "complete"  };
+    xkb_symbols   { include "pc+gb(mac)+inet(evdev)+level3(ralt_switch)+eurosign(2)+terminate(ctrl_alt_bksp)+macintosh_vndr/apple(alupckeys)+magickbd(numpad_enter)"   };
+    xkb_geometry  { include "pc(pc105)" };
+};
