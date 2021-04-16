@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Enable the config setting for the screen sharing toolbar in MS Teams.
+# This setting needs to be enabled everytime Teams is launched.
+sed -i 's/enableScreenSharingToolbar":false/"enableScreenSharingToolbar":true/' ~/.config/Microsoft/Microsoft\ Teams/settings.json
