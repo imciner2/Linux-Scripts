@@ -28,6 +28,16 @@ function path_remove_basedir {
 }
 
 ###############################################################
+# A function to determine if a variable is an array
+#
+# @param $1 the variable to test
+###############################################################
+function is_array() {
+  local variable_name=$1
+  [[ "$(declare -p $variable_name)" =~ "declare -a" ]]
+}
+
+###############################################################
 # A function to only print stuff out when requested
 #
 # This function requires that the variable $PRINT is set to 1 to
@@ -108,4 +118,23 @@ function print_all_vers {
   done
 
   disp "\n"
+}
+
+
+###############################################################
+# Function to get the last element in an array on all bash
+# versions.
+#
+# @param $1 the array
+###############################################################
+function get_last_element {
+  local arr="$1"
+  if is_array arr;
+  then
+    local arrayLength=${#arr[@]}
+    echo "${arrayLength}"
+    LAST_ELEMENT="$arr[${arrayLength}-1]"
+  else
+    LAST_ELEMENT="$arr"
+  fi
 }

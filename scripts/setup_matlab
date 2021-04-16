@@ -45,33 +45,22 @@ EXIST_INSTALL=$(dir $MATBASE)
 ###############################################################
 # Display the help if requested
 ###############################################################
-if [ $# == 0 ];
+if [ $# > 0 ];
 then
-	disp "$(basename $0) version print\n"
-	disp "The version should be provided as the last 3 characters (e.g. 2017b is 17b)\n"
-	disp "Print is an optional argument for if anything should be printed. When 0, it will disable printing "
-	disp "this can be used if this script is called from the bashrc scripts (which may have problems when "
-	disp "printing occurs inside of them.\n"
-	disp "\n"
-  print_cur_ver "${EXIST_INSTALL[@]}"
-	print_all_vers "MATLAB" "${EXIST_INSTALL[@]}"
+  if [ "$1" == "-h" ];
+  then
+  	disp "$(basename $0) version print\n"
+  	disp "The version should be provided as the last 3 characters (e.g. 2017b is 17b)\n"
+  	disp "Print is an optional argument for if anything should be printed. When 0, it will disable printing "
+  	disp "this can be used if this script is called from the bashrc scripts (which may have problems when "
+  	disp "printing occurs inside of them.\n"
+  	disp "\n"
+    print_cur_ver "${EXIST_INSTALL[@]}"
+  	print_all_vers "MATLAB" "${EXIST_INSTALL[@]}"
 
-	break
+  	break
+  fi
 fi
-
-
-###############################################################
-# Make sure that the user supplied a version
-###############################################################
-if [ -z $1 ];
-then
-  disp_err "Must supply the desired version of MATLAB. Only provide the last 3 characters (e.g. 16b)."
-  break
-else
-  # The input is the MATLAB version (last 3 characters)
-  MATVER="R20$1"
-fi
-
 
 ###############################################################
 # Make sure that the script has been sourced
@@ -90,17 +79,33 @@ print_all_vers "MATLAB" "${EXIST_INSTALL[@]}"
 print_cur_ver "${EXIST_INSTALL[@]}"
 
 
+###############################################################
+# Make sure that the user supplied a version
+###############################################################
+if [ -z $1 ];
+then
+  # Use the most recent version if no version is given in the arguments
+  get_last_element "${EXIST_INSTALL}"
+  MATVER="${LAST_ELEMENT}"
+else
+  # The input is the MATLAB version (last 3 characters)
+  MATVER="R20$1"
+fi
+
+
 ###################################################################
 # Clean the path
 ###################################################################
 path_remove_basedir "$MATBASE"
 
-if [ $1 == "none" ];
+if [ $# > 0 ];
 then
-  disp "Removing MATLAB from the path\n"
-  break
+  if [ "$1" == "none" ];
+  then
+    disp "Removing MATLAB from the path\n"
+    break
+  fi
 fi
-
 
 ###################################################################
 # Find if the correct version is installed
