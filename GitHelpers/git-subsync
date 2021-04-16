@@ -1,0 +1,4 @@
+# https://gist.github.com/nicktoumpelis/11214362
+
+git submodule foreach --recursive git reset --hard
+git submodule update --init --recursive

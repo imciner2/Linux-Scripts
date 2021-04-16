@@ -18,7 +18,7 @@
 
 	# Update the current branch against the given remote/branch
 	# use git update remote branch
-	update = "!git fetch --all && git rebase $1 $2 #"
+	update = "!git fetch --all && git rebase --strategy=resolve $1 $2 #"
 	
 	# Format patch/reset all against specified remote/branch
 	# use git command remote/branch
