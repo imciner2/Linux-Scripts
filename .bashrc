@@ -152,7 +152,9 @@ function cmd_prompt_func() {
     fi
 
     git_status=$(git status 2> /dev/null)
-    if [[ $git_status =~ 'Your branch is behind' ]];
+    git_dirty=$(git status -s 2> /dev/null | tail -n 1)
+    
+	if [[ $git_status =~ 'Your branch is behind' ]];
     then
         GIT_COLOR=${BWhite}${On_Red}
     elif [[ $git_status =~ 'Your branch'.+diverged ]];
@@ -162,24 +164,36 @@ function cmd_prompt_func() {
     then
         GIT_COLOR=${BWhite}${On_Yellow}
     else
-        GIT_COLOR=${BCyan}
+        GIT_COLOR=${BCyan}${On_Green}
     fi
 
     if [[ -n $branch ]];
     then
-        GIT_BASH_PROMPT=" \[$GIT_COLOR\]($branch)\[$NC\]"
+        if [[ -n $git_dirty ]];
+        then
+            GIT_BASH_PROMPT=" \[$GIT_COLOR\]($branch)±\[$NC\]"
+        else
+            GIT_BASH_PROMPT=" \[$GIT_COLOR\]($branch)\[$NC\]"
+        fi
     else
         GIT_BASH_PROMPT=""
     fi
 
+    ICON_START="┌"
+    ICON_END="└❯ "
+
     # Tailor the prompt to contain the username, hostname, and current directory
-    export PS1="[\[$SU\]\u\[$NC\]@\[$CNX\]\H\[$NC\] \[$WP\]\w$GIT_BASH_PROMPT]$\[$NC\] "
+    export PS1="$ICON_START"
+    export PS1+="\[$On_Purple\]\[$SU\]\u\[$NC\]\[$On_Purple\]@\[$CNX\]\H \[$NC\]"
+    export PS1+="\[$On_Cyan\]\[$WP\]\w\[$NC\]"
+    export PS1+="$GIT_BASH_PROMPT\n$ICON_END\[$NC\] "
 }
 
 # Define the prompt command from above as the terminal's command.
 # This will let it be run in the terminal before the next line is printed,
 # so that the prompt updates for the new folder.
-export PROMPT_COMMAND="cmd_prompt_func"
+#export PROMPT_COMMAND="cmd_prompt_func"
+source ~/Documents/repositories/Linux-Scripts/agnoster.theme.sh
 
 # A function to assist in path manipulation
 # This function comes from: https://unix.stackexchange.com/questions/108873/removing-a-directory-from-path
