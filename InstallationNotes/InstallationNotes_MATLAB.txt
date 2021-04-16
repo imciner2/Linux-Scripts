@@ -86,8 +86,12 @@ mv sys/os/glnxa64/libgfortran.so.3 sys/os/glnxa64/libgfortran.so.3.old
 #################################################
 # Based on: https://wiki.archlinux.org/index.php/matlab#Addon_manager_not_working
 
-# Relink the libgcrypt library
+# Relink the libgcrypt library (only for 2020a and below)
 ln -fs /usr/lib64/libgcrypt.so.20 sys/jxbrowser-chromium/glnxa64/chromium/libgcrypt.so.11
+
+# Relink the libcrypto library (2020b and above)
+mv bin/glnxa64/libcrypto.so.1.1 bin/glnxa64/libcrypto.so.1.1.old
+ln -s /usr/lib64/libcrypto.so.1.1.1h bin/glnxa64/libcrypto.so.1.1
 
 # Relink several other libraries 
 ln -fs /usr/lib64/libgio-2.0.so.0 cefclient/sys/os/glnxa64/libgio-2.0.so;
@@ -115,3 +119,12 @@ ln -fs /usr/lib64/libfreetype.so.6 bin/glnxa64/libfreetype.so.6
 # Provides the libcrypt.so.1 library on Fedora 30
 # See https://fedoraproject.org/wiki/Changes/FullyRemoveDeprecatedAndUnsafeFunctionsFromLibcrypt
 dnf install libxcrypt-compat
+
+
+####################################################
+# Fix compatibility issues with MATLAB Connector   #
+####################################################
+# cd into the .MATLABConnector/vXXXXX/hostname folder
+mv cefclient/sys/os/glnxa64/ cefclient/sys/os/glnxa64-old/
+mkdir cefclient/sys/os/glnxa64
+mv cefclient/sys/os/glnxa64-old/libcef.so cefclient/sys/os/glnxa64/
