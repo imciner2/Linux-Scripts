@@ -15,3 +15,6 @@ set tabstop=4
 
 " Set the colorscheme
 colorscheme default
+
+" Add a line at 72 characters into the column
+set colorcolumn=72
