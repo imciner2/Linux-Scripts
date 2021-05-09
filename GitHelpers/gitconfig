@@ -36,6 +36,9 @@
 	# Diff with cached files
 	diffc = diff --cached
 
+	# Checkout a GitLab merge request branch
+	gitlab-mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+
 [color]
 	interactive = auto
 	ui = true
