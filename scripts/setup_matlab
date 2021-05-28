@@ -85,7 +85,7 @@ print_cur_ver "${EXIST_INSTALL[@]}"
 if [ -z $1 ];
 then
   # Use the most recent version if no version is given in the arguments
-  get_last_element "${EXIST_INSTALL}"
+  get_last_word "${EXIST_INSTALL}"
   MATVER="${LAST_ELEMENT}"
 else
   # The input is the MATLAB version (last 3 characters)

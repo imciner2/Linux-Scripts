@@ -122,6 +122,18 @@ function print_all_vers {
 
 
 ###############################################################
+# Function to get the last word of a string
+#
+# @param $1 is the string to break on spaces
+###############################################################
+function get_last_word {
+  for i in $1
+  do
+    LAST_ELEMENT=$i
+  done
+}
+
+###############################################################
 # Function to get the last element in an array on all bash
 # versions.
 #
