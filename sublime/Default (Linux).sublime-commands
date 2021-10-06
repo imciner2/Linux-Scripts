@@ -16,6 +16,22 @@
         }
     },
     {
+        "caption": "Terminus: Open Julia Stable",
+        "command": "terminus_open",
+        "args"   : {
+            "shell_cmd": "julia",
+            "cwd": "${file_path:${folder}}",
+            "title": "Julia Stable REPL",
+            "pre_window_hooks": [
+                ["focus_group", {"group": 1}]
+            ],
+            "env": {
+                "JULIA_NUM_THREADS": "4",
+                "JULIA_EDITOR": "sublime_text"
+            },
+        }
+    },
+    {
         "caption": "Terminus: Open Julia 1.5",
         "command": "terminus_open",
         "args"   : {

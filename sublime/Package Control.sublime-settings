@@ -5,11 +5,13 @@
 	],
 	"installed_packages":
 	[
+		"Agila Theme",
 		"ARM Assembly",
 		"Autotools",
 		"BetterFindBuffer",
 		"BetterSwitchHeaderImplementation",
 		"BracketHighlighter",
+		"Buildview",
 		"Clang Format",
 		"CMakeBuilder",
 		"CMakeEditor",
@@ -41,16 +43,16 @@
 		"smartifdef",
 		"SmartNewWindow",
 		"Sublime Bookmarks",
-		"sublime-text-2-buildview",
 		"SublimeLinter",
 		"SublimeLinter-annotations",
 		"Terminus",
+		"Theme - Afterglow",
 		"Theme - Spacegray",
 		"TodoReview",
 		"x86 and x86_64 Assembly",
-		"Zeal"
+		"Zeal",
 	],
 	"repositories":
 	[
-	]
+	],
 }

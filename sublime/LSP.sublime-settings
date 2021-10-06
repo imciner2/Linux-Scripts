@@ -61,7 +61,7 @@
 		{
 			"command":
 			[
-				"julia1.5",
+				"julia",
 				"--startup-file=no",
 				"--history-file=no",
 				"-e",
