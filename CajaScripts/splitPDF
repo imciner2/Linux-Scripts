@@ -24,12 +24,15 @@ do
     # This only works on PDF files, throw an error if it is not a PDF
     zenity --error --title="Not a PDF" --text="$f is not a PDF file. This script only works on PDF files."
   else
+
+#zenity --error --title='testing'  --text="$(dirname $f)"
+
     # Create the file names and do the conversion
     NAME=${f%".pdf"}
     INPUTFILE="$f"
     OUTPUTFILE="$NAME.pdf"
 
-	NUMPAGES=`gs -q -dNODISPLAY -c "("$f") (r) file runpdfbegin pdfpagecount = quit" 2>/dev/null`
+	NUMPAGES=`gs -q --permit-file-read="$(dirname $f)/" -dNODISPLAY -c "("$f") (r) file runpdfbegin pdfpagecount = quit" 2>/dev/null`
 	COUNTER=1
 	( while [ $COUNTER -le $NUMPAGES ] ; do
 		NEWNAME=$NAME-p$COUNTER.pdf
