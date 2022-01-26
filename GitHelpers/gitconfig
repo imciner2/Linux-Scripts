@@ -7,7 +7,8 @@
     # Display some nice logs
     last = log --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' -1
 	l    = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit
-	ld   = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit -p
+	#ld   = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit -p
+	ld   = log -p
     ls   = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit --name-status
     lol  = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit --decorate
     lola = log --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an> (%ar)%Creset' --abbrev-commit --decorate --all
@@ -62,3 +63,19 @@
 	new = cyan bold
 	commit = blue
 	whitespace = red
+
+[delta]
+    features = decorations
+	hyperlinks = true
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
