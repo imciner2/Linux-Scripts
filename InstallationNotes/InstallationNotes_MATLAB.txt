@@ -128,3 +128,12 @@ dnf install libxcrypt-compat
 mv cefclient/sys/os/glnxa64/ cefclient/sys/os/glnxa64-old/
 mkdir cefclient/sys/os/glnxa64
 mv cefclient/sys/os/glnxa64-old/libcef.so cefclient/sys/os/glnxa64/
+
+
+####################################################
+# Allow the installer to run (Matlab 2021+)        #
+####################################################
+# There is an Xserver issue where the installer can't connect to the Xserver when run as root
+# https://uk.mathworks.com/matlabcentral/answers/1459909-installer-hang-when-installing-matlab-r2021b-as-root-on-ubuntu-20-04#comment_1759029
+# Run this command before the installer to allow root to talk to the Xserver
+xhost +SI:localuser:root
