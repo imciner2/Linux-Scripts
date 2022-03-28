@@ -1,5 +1,9 @@
+[credential]
+	helper = store
+
 [http]
 	sslVerify = true
+
 [alias]
     # Display all branches
 	b = branch -a
@@ -63,6 +67,16 @@
 	new = cyan bold
 	commit = blue
 	whitespace = red
+
+[core]
+	pager = delta
+	editor = vim
+
+[pager]
+	blame = delta
+
+[interactive]
+	diffFilter = delta --color-only
 
 [delta]
     features = decorations
