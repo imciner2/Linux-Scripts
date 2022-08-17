@@ -79,17 +79,41 @@
 	diffFilter = delta --color-only
 
 [delta]
-    features = decorations
+    features = modified-mantis-shrimp
 	hyperlinks = true
+	line-numbers = true
+	colorMoved = default
 
-[delta "interactive"]
-    keep-plus-minus-markers = false
-
-[delta "decorations"]
+[delta "modified-mantis-shrimp"]
+    # Modified from the mantis-shrimp theme originally by author https://github.com/2kabhishek
+    dark = true
+    side-by-side = false
+    navigate = true
+    keep-plus-minus-markers = true
+    hyperlinks = true
+    file-added-label = [+]
+    file-copied-label = [==]
+    file-modified-label = [*]
+    file-removed-label = [-]
+    file-renamed-label = [->]
+    file-style = omit
+    zero-style = syntax
+    syntax-theme = Monokai Extended
     commit-decoration-style = blue ol
     commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
+    hunk-header-style = file line-number syntax bold
+    hunk-header-file-style = "#c63bee" ul bold
+    hunk-header-line-number-style = "#ffd21a" box bold
+    line-numbers = true
+    line-numbers-left-format = "{nm:>1}|"
+    line-numbers-left-style = "#1688f0"
+    line-numbers-minus-style = "#ff0051" bold
+    line-numbers-plus-style = "#03e57f" bold
+    line-numbers-right-format = "{np:>1}|"
+    line-numbers-right-style = "#1688f0"
+    line-numbers-zero-style = "#aaaaaa" italic
+    minus-emph-style = syntax bold "#a80000"
+    minus-style = syntax "#5d001e"
+    plus-emph-style = syntax bold "#007800"
+    plus-style = syntax "#005433"
+    whitespace-error-style = "#280050"
