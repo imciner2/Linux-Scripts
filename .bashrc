@@ -33,6 +33,9 @@ fi
 alias grep="/bin/grep --color=always"
 alias vr="vi -R"
 
+# Enable history searching in the BASH shell
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 function cmd_prompt_func() {
 
