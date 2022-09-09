@@ -15,6 +15,7 @@
 		"Clang Format",
 		"CMakeBuilder",
 		"CMakeEditor",
+		"CUDA C++",
 		"Debugger",
 		"Find++",
 		"FlowTree",
