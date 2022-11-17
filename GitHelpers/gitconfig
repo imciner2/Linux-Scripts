@@ -47,6 +47,10 @@
 	# Checkout a GitHub pull request branch
 	github-pr = !sh -c 'git fetch $1 pull/$2/head:pr-$1-$2 && git checkout pr-$1-$2' -
 
+	# Fixup a commit
+	fixup = commit --fixup
+	rebase-fixup = rebase -i --autosquash
+
 [color]
 	interactive = auto
 	ui = true
