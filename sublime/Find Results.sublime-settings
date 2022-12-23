@@ -1,3 +1,5 @@
 {
-  "color_scheme": "Packages/User/FindResults.hidden-tmTheme",
+  "color_scheme": "auto",  
+  "dark_color_scheme": "Packages/User/FindResults_dark.hidden-tmTheme",
+  "light_color_scheme": "Packages/User/FindResults_light.hidden-tmTheme",
 }
