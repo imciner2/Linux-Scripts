@@ -9,23 +9,24 @@
 		<dict>
 			<key>settings</key>
 			<dict>
-				<key>background</key>
-				<string>#2b303b</string>
-				<key>foreground</key>
-				<string>#65737e</string>
+                <key>background</key>
+                <string>#2E2E2E</string>
 
-				<key>caret</key>
-				<string>#c0c5ce</string>
-				<key>invisibles</key>
-				<string>#65737e</string>
+                <key>caret</key>
+                <string>#FFFFFF</string>
 
-				<key>lineHighlight</key>
-				<string>#343d46</string>
+                <key>foreground</key>
+                <string>#d6d6d6</string>
 
-				<key>selection</key>
-				<string>#4f5b66</string>
-				<key>selectionBorder</key>
-				<string>#eff1f5</string>
+                <key>invisibles</key>
+                <string>#404040</string>
+
+                <key>lineHighlight</key>
+                <string>#333435</string>
+
+                <key>selection</key>
+                <string>#5A647E</string>
+
 				<key>selectionForeground</key>
 				<string>#a7adba</string>
 
@@ -105,16 +106,15 @@
 
 		<dict>
 			<key>scope</key>
-			<string>match.find-in-files</string>
+			<string>line.match.find-in-files</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#2b303b</string>
+                <string>#444466</string>
 				<key>foreground</key>
-				<string>#eff1f5</string>
+				<string>#a3be8c</string>
 			</dict>
 		</dict>
-
 
 		<dict>
 			<key>scope</key>
@@ -139,7 +139,6 @@
 				<string>#2b303b</string>
 			</dict>
 		</dict>
-
 
 		<dict>
 			<key>scope</key>

@@ -10,8 +10,36 @@
       <key>settings</key>
       <dict>
         <key>background</key>
-        <string>#f8f8f8</string>
+        <string>#FFFFFF</string>
+        
+        <key>caret</key>
+        <string>#333333</string>
 
+        <key>foreground</key>
+        <string>#333333</string>
+
+        <key>invisibles</key>
+        <string>#E0E0E0</string>
+
+        <key>lineHighlight</key>
+        <string>#F8EEC7</string>
+
+        <key>selection</key>
+        <string>#B0CDE755</string>
+
+        <key>selectionBorder</key>
+        <string>#B0CDE755</string>
+
+        <key>inactiveSelection</key>
+        <string>#EDEDED</string>
+
+        <key>findHighlight</key>
+        <string>#FFE792</string>
+
+        <key>findHighlightForeground</key>
+        <string>#333333</string>
+
+<!--
         <key>foreground</key>
         <string>#444444</string>
 
@@ -34,7 +62,7 @@
         <string>#444444</string>
 
         <key>findHighlightForeground</key>
-        <string>#000000</string>
+        <string>#000000</string>-->
 
       </dict>
     </dict>
@@ -48,6 +76,30 @@
         <string>#4078c0</string>
         <key>fontStyle</key>
         <string>bold</string>
+      </dict>
+    </dict>
+
+    <dict>
+      <key>scope</key>
+      <string>header.find-in-files</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key>
+        <string>#33333322</string>
+        <key>foreground</key>
+        <string>#444444</string>
+      </dict>
+    </dict>
+
+    <dict>
+      <key>scope</key>
+      <string>footer.find-in-files</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key>
+        <string>#33333322</string>
+        <key>foreground</key>
+        <string>#444444</string>
       </dict>
     </dict>
 
@@ -105,10 +157,34 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#44444433</string>
+        <string>#44444466</string>
       </dict>
     </dict>
 
+    <dict>
+      <key>scope</key>
+      <string>text.find-in-files</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#44444466</string>
+      </dict>
+    </dict>
+
+    <dict>
+      <key>scope</key>
+      <string>line.match.find-in-files</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key>
+        <string>#33333322</string>
+<!--        <string>#FFD42033</string>-->
+        <key>foreground</key>
+        <string>#444444</string>
+      </dict>
+    </dict>
+
+<!-- Individual fields, but we don't use them.
     <dict>
       <key>scope</key>
       <string>match.find-in-files</string>
@@ -116,9 +192,10 @@
       <dict>
         <key>background</key>
         <string>#FFD42033</string>
+        <key>foreground</key>
+        <string>#444444</string>
       </dict>
     </dict>
-
 
     <dict>
       <key>scope</key>
@@ -143,7 +220,7 @@
         <string>#FFD42044</string>
       </dict>
     </dict>
-
+-->
 
     <dict>
       <key>scope</key>
@@ -151,21 +228,9 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#f8f8f8</string>
-        <key>background</key>
         <string>#4078c0</string>
         <key>fontStyle</key>
         <string>bold</string>
-      </dict>
-    </dict>
-
-    <dict>
-      <key>scope</key>
-      <string>footer.find-in-files</string>
-      <key>settings</key>
-      <dict>
-        <key>background</key>
-        <string>#33333322</string>
       </dict>
     </dict>
 
