@@ -8,6 +8,7 @@
 		"Agila Theme",
 		"ARM Assembly",
 		"Autotools",
+		"BetterFindBuffer",
 		"BetterSwitchHeaderImplementation",
 		"BracketHighlighter",
 		"Buildview",
@@ -57,5 +58,12 @@
 	],
 	"repositories":
 	[
+        "https://ism.engineer/sublime/repository.json"
 	],
+	"downloader_precedence": {
+		"windows": ["wininet", "oscrypto"],
+		"osx": ["urllib", "oscrypto", "curl"],
+		// Use cURL to get around old CA certs in the Sublime install
+		"linux": ["curl", "urllib", "oscrypto", "wget"],
+	},
 }
