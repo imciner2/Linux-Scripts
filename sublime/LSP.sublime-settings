@@ -6,7 +6,9 @@
 			"command":
 			[
 				"clangd",
-				"-log=verbose"
+				"-log=verbose",
+				"--header-insertion-decorators",
+				"--suggest-missing-includes"
 			],
 			"enabled": "true",
 			"languages":
