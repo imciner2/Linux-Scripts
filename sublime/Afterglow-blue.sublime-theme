@@ -10,16 +10,37 @@
             "layer0.tint": [255, 255, 255],
             "layer0.opacity": 0.75,
             "content_margin": [8, 8]
-          },
-          {
+        },
+        {
             "class": "icon_file_type",
             "parents": [{"class": "tree_row", "attributes": ["hover"]}],
             "layer0.opacity": 0.5
-          },
-          {
+        },
+        {
             "class": "icon_file_type",
             "parents": [{"class": "tree_row", "attributes": ["selected"]}],
             "layer0.opacity": 1.0
-          }
+        },
+
+        // Make the vertical overlay scrollbar puck a bit wider
+        {
+            "class": "puck_control",
+            "settings": ["overlay_scroll_bars"],
+            "layer0.texture": "",
+            "layer0.inner_margin": [0,5],
+            "content_margin": [5,32],
+            "blur": true
+        },
+
+        // Make the horizontal overlay scrollbar puck a bit wider
+        {
+            "class": "puck_control",
+            "settings": ["overlay_scroll_bars"],
+            "attributes": ["horizontal"],
+            "layer0.texture": "",
+            "layer0.inner_margin": [5,0],
+            "content_margin": [16,5],
+            "blur": true
+        },
     ]
 }
